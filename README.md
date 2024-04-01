@@ -1,4 +1,4 @@
-WORKSHOP_TITLE
+Flavors of the Pharmaverse
 ================
 
 ### posit::conf(2024)
