@@ -3,7 +3,7 @@ Flavors of the Pharmaverse
 
 ### posit::conf(2024)
 
-by INSTRUCTOR_NAME
+by Becca Krouse, Daniel Sjoberg, Ellis Hughes, Mike Stackhouse
 
 -----
 
