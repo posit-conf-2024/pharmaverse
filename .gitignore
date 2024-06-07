@@ -2,3 +2,9 @@
 .Rhistory
 .RData
 .Ruserdata
+
+/.quarto/
+/docs/
+.DS_Store
+
+/slides/[0-9]*.html
