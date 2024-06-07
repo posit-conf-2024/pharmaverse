@@ -1,0 +1,72 @@
+[
+  {
+    "objectID": "pre-conf-communication.html",
+    "href": "pre-conf-communication.html",
+    "title": "Pre-Conference Communications",
+    "section": "",
+    "text": "Add copies of the emails we send to attendees here. Then anyone who registers late will also have access to the information.",
+    "crumbs": [
+      "Communications"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Flavors of the pharmaverse",
+    "section": "",
+    "text": "🗓️ August 12, 2024 | 09:00 - 17:00 PST\n🏨 Hyatt Regency Seattle, Room TBA\n📝 Workshop Registration",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#description",
+    "href": "index.html#description",
+    "title": "Flavors of the pharmaverse",
+    "section": "Description",
+    "text": "Description\nOver the past 4 years, the pharmaverse was created and has blossomed into a booming community of organizations and package developers aimed at supporting R development with focus on the clinical reporting pipeline. Even within a world as standardized as regulatory submissions, organizations still tend to have sometimes vastly different requirements within their own processes.\nIn this workshop, we’ll give a high level overview of the scope and tools available within the pharmaverse for the clinical pipeline, including tools for ADaM data set curation, creating Analysis Results Data Sets, and TLGs. To help attendees understand how there are different paradigms and pathways through the pharmaverse, we’ll take a tour through two to three different strategies available to support table, listing, and figure creation. Attendees of this workshop will walk away with an understanding of how the pharmaverse can help their organization and where they can look to learn more about the right tools to support their needs.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#audience",
+    "href": "index.html#audience",
+    "title": "Flavors of the pharmaverse",
+    "section": "Audience",
+    "text": "Audience\nADD AUDIENCE INFO",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#pre-work",
+    "href": "index.html#pre-work",
+    "title": "Flavors of the pharmaverse",
+    "section": "Pre-work",
+    "text": "Pre-work\nAdd items here we want attendees to complete before the conf.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#instructors",
+    "href": "index.html#instructors",
+    "title": "Flavors of the pharmaverse",
+    "section": "Instructors",
+    "text": "Instructors\n\nDaniel D. Sjoberg (he/him) is a Senior Principal Data Scientist at Genentech. Previously, he was a Lead Data Science Manager at the Prostate Cancer Clinical Trials Consortium, and a Senior Biostatistician at Memorial Sloan Kettering Cancer Center in New York City. He enjoys R package development, creating many packages available on CRAN, R-Universe, and GitHub. His research interests include adaptive methods in clinical trials, precision medicine, and predictive modeling. Daniel is the winner of the 2021 American Statistical Association (ASA) Innovation in Statistical Programming and Analytics award.\nBecca Krouse is a data scientist in GSK’s Statistics and Data Science Innovation Hub. A biostatistician by training, she has experience spanning 13+ years in the field of clinical research and specializes in developing R-based tools.\nEllis Hughes is a Data Science Leader and has worked in the pharmaceutical industry for almost a decade. He focuses on how organizations can use R and take open source approaches to improve processes and solve problems. During his free time he organizes the Seattle UseR group, the Cascadia R Conference, and hosts a weekly R screencast, TidyX, to explain data science concepts.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "license.html",
+    "href": "license.html",
+    "title": "License",
+    "section": "",
+    "text": "This work is licensed under a Creative Commons Attribution 4.0 International License.",
+    "crumbs": [
+      "License"
+    ]
+  }
+]
