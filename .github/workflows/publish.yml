@@ -40,6 +40,7 @@ jobs:
         shell: Rscript {0}
         run: |
           if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
+          renv::install(c("rmarkdown", "yaml"))
           renv::restore()
 
       - name: Publish to GitHub Pages
