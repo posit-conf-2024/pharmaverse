@@ -1,6 +1,6 @@
 ---
 title: "Flavors of the pharmaverse"
-subtitle: "posit::conf 2024"
+subtitle: "`posit::conf(2024)`"
 engine: knitr
 editor: 
   markdown: 
