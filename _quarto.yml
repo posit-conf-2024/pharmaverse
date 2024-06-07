@@ -1,0 +1,46 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - "*.qmd"
+
+website:
+  page-navigation: true
+  title: "Flavors of the pharmaverse"
+  description: "posit:conf Workshop 2024"
+  favicon: "images/pharmaverse-hex.png"
+
+  repo-url: https://github.com/posit-conf-2024/pharmaverse
+  repo-actions: [edit, issue]
+
+  page-footer:
+    left: "This page is built with ❤️ and [Quarto](https://quarto.org/). Inspired by [@minecr.bsky.social](https://bsky.app/profile/minecr.bsky.social)."
+    background: "#E2E2E2"
+
+  sidebar:
+    background: "#E2E2E2"
+    logo: "images/pharmaverse-hex.png"
+    pinned: true
+    align: center
+    tools:
+      - icon: github
+        href: https://github.com/posit-conf-2024/pharmaverse
+        text: GitHub
+    style: docked
+    contents:
+     - href: index.qmd
+       text: Home
+     - href: pre-conf-communication.qmd
+     - href: license.qmd
+
+format:
+  html:
+    theme: [cosmo, theme.scss]
+    toc: true
+    code-copy: true
+    code-overflow: scroll
+    mainfont: "Atkinson Hyperlegible"
+    highlight-style: a11y
+
+editor: source
+
