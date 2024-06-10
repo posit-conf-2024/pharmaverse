@@ -58,8 +58,9 @@ in New York City. He enjoys R package development, creating many
 packages available on [CRAN](https://cran.r-project.org/web/packages/),
 [R-Universe](https://ddsjoberg.r-universe.dev/ui#packages), and
 [GitHub](https://github.com/ddsjoberg). He's a co-organizer of 
-[rainbowR](https://rainbowr.netlify.app/), a community that supports, promotes 
-and connects LGBTQ+ people who code in the R language. His research interests include
+[rainbowR](https://rainbowr.netlify.app/) (a community that supports, promotes 
+and connects LGBTQ+ people who code in the R language) and of the [R Medicine Conference](https://rconsortium.github.io/RMedicine_website/). 
+His research interests include
 adaptive methods in clinical trials, precision medicine, and predictive
 modeling. Daniel is the winner of the 2021 American Statistical
 Association (ASA) Innovation in Statistical Programming and Analytics
