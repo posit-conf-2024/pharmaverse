@@ -79,6 +79,13 @@ processes and solve problems. During his free time he organizes the
 Seattle UseR group, the Cascadia R Conference, and hosts a weekly R
 screencast, TidyX, to explain data science concepts.
 
+![](images/andrew.png){style="float:left;padding: 0 10px 0 0;"
+fig-alt="Headshot of Andrew Bates" width="150"}
+
+**Andrew Bates** Andrew is a Data Solutions Engineer at Atorus Research where 
+he builds tools that enable people to solve their data problems. 
+He specializes in R and its intersection with web technologies.
+
 **Casey Aguilar-Gervase** is a Senior Data Visualization Engineer at Atorus.
 Casey enjoys combining the art of design with clinical programming in R to 
 create innovative Shiny applications. With a strong background in both
