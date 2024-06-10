@@ -63,7 +63,6 @@ modeling. Daniel is the winner of the 2021 American Statistical
 Association (ASA) Innovation in Statistical Programming and Analytics
 award.
 
-
 ![](images/becca.png){style="float:left;padding: 0 20px 0 20px;"
 fig-alt="Headshot of Becca Krouse" width="140"}
 
