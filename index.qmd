@@ -74,6 +74,11 @@ Science Innovation Hub. A biostatistician by training, she has
 experience spanning 13+ years in the field of clinical research and
 specializes in developing R-based tools.
 
+<br>
+
+![](images/ellis.png){style="float:left;padding: 0 20px 0 20px;"
+fig-alt="Headshot of Ellis Hughes" width="140"}
+
 **Ellis Hughes** is a Data Science Leader and has worked in the
 pharmaceutical industry for almost a decade. He focuses on how
 organizations can use R and take open source approaches to improve
