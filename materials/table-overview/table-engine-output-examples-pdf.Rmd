@@ -1,0 +1,33 @@
+---
+title: "PDF output"
+output: pdf_document
+classoption: landscape
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(gtsummary)
+tbl <- readRDS(file = here::here("materials", "table-overview", "img", "gsummary-tbl.rds"))
+```
+
+## PDF huxtable
+
+```{r}
+# as_hux_table(tbl)
+```
+
+## PDF kable
+
+```{r}
+tbl |> 
+  bold_labels() |> 
+  as_kable()
+```
+
+## PDF kableExtra
+
+```{r}
+as_kable_extra(tbl)
+```
+
