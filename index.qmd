@@ -63,7 +63,7 @@ tibble::tribble(
 
 ## Pre-work
 
-- [ ] Book mark this site. You'll reference it throughout the workshop. [pos.it/pharmaverse_24](https://posit-conf-2024.github.io/pharmaverse/)
+- [ ] Bookmark this site. You'll reference it throughout the workshop. [pos.it/pharmaverse_24](https://posit-conf-2024.github.io/pharmaverse/)
 
 - [ ] Sign up for a *free* [Posit Cloud](https://posit.cloud/) account.
 
