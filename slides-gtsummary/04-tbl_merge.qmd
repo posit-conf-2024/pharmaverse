@@ -1,0 +1,190 @@
+# tbl_merge()/tbl_stack()
+
+## tbl_merge() for side-by-side tables
+
+```{r}
+#| label: 'tbl_merge'
+tbl_n <- 
+  tbl_summary(trial, include = grade, statistic = grade ~ "{n}") |> 
+  modify_header(all_stat_cols() ~ "**N**") |> # update column header
+  modify_footnote(all_stat_cols() ~ NA) # remove footnote
+tbl_age <-
+  tbl_continuous(trial, include = grade, variable = age, by = trt) |> 
+  modify_header(all_stat_cols() ~ "**{level}**") # update header
+
+# combine the tables side by side
+list(tbl_n, tbl_age) |> 
+  tbl_merge(tab_spanner = FALSE) # suppress default header
+```
+
+## tbl_stack() to combine vertically
+
+```{r}
+#| label: 'tbl_stack'
+tbl_drug_a <- trial |> 
+  dplyr::filter(trt == "Drug A") |> 
+  tbl_summary(include = c(response, death), missing = "no")
+tbl_drug_b <- trial |> 
+  dplyr::filter(trt == "Drug B") |> 
+  tbl_summary(include = c(response, death), missing = "no")
+
+# stack the two tables 
+list(tbl_drug_a, tbl_drug_b) |> 
+  tbl_stack(group_header = c("Drug A", "Drug B")) |> # optionally include headers for each table
+  modify_header(all_stat_cols() ~ "**Outcome Rates**")
+```
+
+## tbl_strata() for stratified tables
+
+```{r}
+tbl_strata(
+  trial, 
+  strata = trt, 
+  ~ .x |> 
+    tbl_wide_summary(include = c(response, death))
+)
+```
+
+The default is to combine stratified tables with `tbl_merge()`.
+
+
+## tbl_strata() for stratified tables
+
+We can also stack the tables.
+
+```{r}
+tbl_strata(
+  trial, 
+  strata = trt, 
+  ~ .x |> 
+    tbl_wide_summary(include = c(response, death)),
+  .combine_with = "tbl_stack"
+)
+```
+
+## Define custom function `tbl_cmh()`
+
+<p align="center"><img src="images/tbl_cmh.png" width=68%></p>
+
+## Define custom function `tbl_cmh()`
+
+<p align="center"><img src="images/tbl_cmh_markup.png" width=68%></p>
+
+
+<!-- ## tbl_merge() for side-by-side tables -->
+
+<!-- ::: {.columns} -->
+<!-- ::: {.column width="50%"} -->
+<!-- A **univariable** table: -->
+
+<!-- ```{r} -->
+<!-- tbl_uvsurv <-  -->
+<!--   trial |>  -->
+<!--   select(age, grade, death, ttdeath) |>  -->
+<!--   tbl_uvregression( -->
+<!--     method = coxph, -->
+<!--     y = Surv(ttdeath, death), -->
+<!--     exponentiate = TRUE -->
+<!--   ) |>  -->
+<!--   add_global_p() -->
+<!-- tbl_uvsurv -->
+<!-- ``` -->
+<!-- ::: -->
+
+<!-- ::: {.column width="50%"} -->
+<!-- A **multivariable** table: -->
+
+<!-- ```{r} -->
+<!-- tbl_mvsurv <-  -->
+<!--   coxph( -->
+<!--     Surv(ttdeath, death) ~ age + grade,  -->
+<!--     data = trial -->
+<!--   ) |>  -->
+<!--   tbl_regression( -->
+<!--     exponentiate = TRUE -->
+<!--   ) |>  -->
+<!--   add_global_p()  -->
+<!-- tbl_mvsurv -->
+<!-- ``` -->
+
+<!-- ::: -->
+<!-- ::: -->
+
+<!-- ## tbl_merge() for side-by-side tables -->
+
+<!-- ```{r} -->
+<!-- tbl_merge( -->
+<!--   list(tbl_uvsurv, tbl_mvsurv), -->
+<!--   tab_spanner = c("**Univariable**", "**Multivariable**") -->
+<!-- ) -->
+<!-- ``` -->
+
+<!-- ## tbl_stack() to combine vertically -->
+
+<!-- ::: {.columns} -->
+<!-- ::: {.column width="50%"} -->
+<!-- A **univariable** table: -->
+
+<!-- ```{r} -->
+<!-- tbl_uvsurv2 <- -->
+<!--   coxph(Surv(ttdeath, death) ~ trt,  -->
+<!--         data = trial) |> -->
+<!--   tbl_regression( -->
+<!--     show_single_row = trt, -->
+<!--     label = trt ~ "Drug B vs A", -->
+<!--     exponentiate = TRUE -->
+<!--   ) -->
+<!-- tbl_uvsurv2 -->
+<!-- ``` -->
+<!-- ::: -->
+
+<!-- ::: {.column width="50%"} -->
+<!-- A **multivariable** table: -->
+
+<!-- ```{r} -->
+<!-- tbl_mvsurv2 <- -->
+<!--   coxph(Surv(ttdeath, death) ~  -->
+<!--           trt + grade + stage + marker,  -->
+<!--         data = trial) |> -->
+<!--   tbl_regression( -->
+<!--     show_single_row = trt, -->
+<!--     label = trt ~ "Drug B vs A", -->
+<!--     exponentiate = TRUE,  -->
+<!--     include = "trt" -->
+<!--   ) -->
+<!-- tbl_mvsurv2 -->
+<!-- ``` -->
+
+<!-- ::: -->
+<!-- ::: -->
+
+<!-- ## tbl_stack() to combine vertically -->
+
+<!-- ```{r} -->
+<!-- #| output-location: "column" -->
+<!-- list(tbl_uvsurv2, tbl_mvsurv2) |> -->
+<!--   tbl_stack( -->
+<!--     group_header =  -->
+<!--       c("Unadjusted", "Adjusted") -->
+<!--   ) -->
+<!-- ``` -->
+
+<!-- ## tbl_strata() for stratified tables -->
+
+<!-- ```{r} -->
+<!-- sm_trial |> -->
+<!--   mutate(grade = paste("Grade", grade)) |> -->
+<!--   tbl_strata( -->
+<!--     strata = grade, -->
+<!--     ~tbl_summary(.x, by = trt, missing = "no") |> -->
+<!--       modify_header(all_stat_cols() ~ "**{level}**") -->
+<!--   ) -->
+<!-- ``` -->
+
+<!-- ## Define custom function `tbl_cmh()` -->
+
+<!-- <p align="center"><img src="images/tbl_cmh.png" width=68%></p> -->
+
+<!-- ## Define custom function `tbl_cmh()` -->
+
+<!-- <p align="center"><img src="images/tbl_cmh_markup.png" width=68%></p> -->

@@ -22,11 +22,7 @@ execute:
 
 {{< include 03-tbl_summary.qmd >}}
 
-<!-- {{< include 04-tbl_regression.qmd >}} -->
-
-<!-- {{< include 05-inline_text.qmd >}} -->
-
-<!-- {{< include 06-tbl_merge.qmd >}} -->
+{{< include 04-tbl_merge.qmd >}}
 
 <!-- {{< include 07-themes.qmd >}} -->
 

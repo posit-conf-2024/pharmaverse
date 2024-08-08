@@ -453,7 +453,6 @@ sm_trial |>
 
 ```{r}
 #| label: 'tbl_continuous'
-#| output-location: "column"
 sm_trial |>
   tbl_continuous(
     variable = age,
@@ -468,7 +467,6 @@ sm_trial |>
 
 ```{r}
 #| label: 'tbl_wide_summary'
-#| output-location: "column"
 trial |>
   tbl_wide_summary(include = c(response, grade))
 ```
@@ -476,8 +474,10 @@ trial |>
 ## Wide Summaries with tbl_wide_summary()
 
 ```{r}
-#| label: 'tbl_wide_summary'
-#| output-location: "column"
+#| label: 'tbl_wide_summary2'
 trial |>
   tbl_wide_summary(include = c(age, marker))
 ```
+
+Naturally, you can change the statistics, and which appear in each column.
+ 
