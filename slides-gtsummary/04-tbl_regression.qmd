@@ -1,0 +1,151 @@
+# tbl_regression()
+
+## Traditional model summary()
+
+::: columns
+::: {.column width="50%" style="font-size:0.75em;font-family:monospace"}
+```{r}
+#| output: true
+#| label: raw-model-summary
+m1 <- 
+  glm(
+    response ~ age + stage,
+    data = trial,
+    family = binomial(link = "logit")
+  )
+```
+:::
+
+::: {.column width="50%" style="font-size:0.5em;"}
+![](images/raw-output-logistic-regression.png)
+:::
+:::
+
+Looks [messy]{.emphasis} and it's not easy to digest
+
+## Basic tbl_regression()
+
+```{r}
+#| output-location: "column"
+tbl_regression(m1)
+```
+
+-   Displays [p-values]{.emphasis} for covariates
+
+-   Shows [reference levels]{.emphasis} for categorical variables
+
+-   [Model type recognized]{.emphasis} as logistic regression with odds ratio appearing in header
+
+## Customize tbl_regression() output
+
+```{r}
+#| output-location: "column"
+tbl_regression(
+  m1,
+  exponentiate = TRUE
+) |> 
+  add_global_p() |>
+  add_glance_table(
+    include = c(nobs,
+                logLik,
+                AIC,
+                BIC)
+  )
+```
+
+-   Display [odds ratio]{.emphasis} estimates and [confidence intervals]{.emphasis}
+
+-   Add [global p-values]{.emphasis}
+
+-   Add various model statistics
+
+## Supported models in tbl_regression()
+
+```{r}
+#| echo: false
+
+list_mods <- broom.helpers::supported_models$model
+list_length <- length(list_mods)
+cut_length <- floor(list_length/3)
+
+```
+
+::: {.columns style="font-size:0.65em"}
+::: {.column width="30%"}
+
+```{r}
+#| echo: false
+glue::glue("* {broom.helpers::supported_models$model[1:cut_length]} <br>") 
+```
+
+:::
+
+::: {.column width="30%"}
+
+```{r}
+#| echo: false
+glue::glue("* {broom.helpers::supported_models$model[(cut_length + 1): (2*cut_length)]} <br>") 
+```
+
+:::
+
+::: {.column width="30%"}
+
+```{r}
+#| echo: false
+glue::glue("* {broom.helpers::supported_models$model[(2*cut_length + 1):list_length]} <br>")
+```
+
+:::
+:::
+
+**Custom tidiers** can be written and passed to `tbl_regression()` using the `tidy_fun=` argument.
+
+## Exercise 4
+
+1.  Build a logistic regression model with death as the outcome. Include smoking and the other variables as covariates.
+
+2.  Summarize the logistic regression model with `tbl_regression()`.
+
+3.  What modifications did you decide to make the the regression summary?`tbl_regression()`
+
+    -   tutorial for reference: [https://www.danieldsjoberg.com/gtsummary/articles/tbl_regression.html](https://www.danieldsjoberg.com/gtsummary/articles/tbl_regression.html)
+
+```{r}
+#| echo: false
+#| cache: false
+countdown(minutes = 8)
+```
+
+## Univariate models with tbl_uvregression()
+
+```{r}
+#| output-location: "column"
+tbl_uvreg <- 
+  sm_trial |> 
+  tbl_uvregression(
+    method = glm,
+    y = response,
+    method.args = 
+      list(family = binomial),
+    exponentiate = TRUE
+  )
+tbl_uvreg
+```
+
+-   Specify model `method`, `method.args`, and the `response` variable
+
+-   Arguments and helper functions like `exponentiate`, `bold_*()`, `add_global_p()` can also be used with `tbl_uvregression()`
+
+## Break
+
+![](images/sister-act-2-dance.gif){width=100%}
+
+::: aside
+[Sister Act 2: Back in the Habit](https://www.youtube.com/watch?v=GqqhKyMZHe0)
+:::
+```{r}
+#| echo: false
+#| cache: false
+countdown(minutes = 10)
+```

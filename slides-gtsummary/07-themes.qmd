@@ -1,0 +1,112 @@
+# {gtsummary} themes
+
+## {gtsummary} theme basics
+
+- A [theme]{.emphasis} is a set of customization preferences that can be easily set and reused. 
+
+- Themes control [default settings for existing functions]{.emphasis}
+
+- Themes control more [fine-grained customization]{.emphasis} not available via arguments or helper functions
+
+- Easily use one of the [available themes]{.emphasis}, or [create your own]{.emphasis}
+
+## {gtsummary} default theme
+
+```{r}
+#| output-location: "column"
+reset_gtsummary_theme()
+m1 |>
+  tbl_regression(
+    exponentiate = TRUE
+  ) |>
+  modify_caption(
+    "Default Theme"
+  )
+```
+
+## {gtsummary} theme_gtsummary_journal()
+
+```{r}
+#| output-location: "column"
+reset_gtsummary_theme()
+theme_gtsummary_journal(journal = "jama")
+
+m1 |>
+  tbl_regression(
+    exponentiate = TRUE
+  ) |>
+  modify_caption(
+    "Journal Theme (JAMA)"
+  )
+```
+
+*Contributions welcome!*
+
+## {gtsummary} theme_gtsummary_language()
+
+```{r}
+#| output-location: "column"
+reset_gtsummary_theme()
+theme_gtsummary_language(language = "zh-tw")
+
+m1 |>
+  tbl_regression(
+    exponentiate = TRUE
+  ) |>
+  modify_caption(
+    "Language Theme (Chinese)"
+  )
+```
+
+**Language options:**
+
+:::{.columns style="font-size:0.65em"}
+::: {.column width="30%"}
+
+- German 
+- English
+- Spanish 
+- French 
+- Gujarati
+- Hindi
+
+::: 
+
+::: {.column width="30%"}
+- Icelandic
+- Japanese
+- Korean
+- Marathi
+- Dutch
+
+:::
+
+::: {.column width="30%"}
+- Norwegian
+- Portuguese
+- Swedish
+- Chinese Simplified
+- Chinese Traditional
+:::
+:::
+
+## {gtsummary} theme_gtsummary_compact()
+
+```{r}
+reset_gtsummary_theme()
+theme_gtsummary_compact()
+
+tbl_regression(m1, exponentiate = TRUE) |>
+  modify_caption("Compact Theme")
+```
+
+*Reduces padding and font size*
+
+## {gtsummary} set_gtsummary_theme()
+
+
+* `set_gtsummary_theme()` to use a custom theme.
+
+* See the {gtsummary} + themes vignette for examples
+
+[http://www.danieldsjoberg.com/gtsummary/articles/themes.html](http://www.danieldsjoberg.com/gtsummary/articles/themes.html)

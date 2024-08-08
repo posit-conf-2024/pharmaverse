@@ -1,0 +1,22 @@
+# {gtsummary} print engines
+
+## {gtsummary} print engines
+
+![](images/gtsummary_rmarkdown.png)
+
+## {gtsummary} print engines
+
+Use any print engine to customize table
+
+```{r}
+#| output-location: "column"
+#| code-line-numbers: "1,5,6,7,8"
+library(gt)
+trial |>
+  select(age, grade) |>
+  tbl_summary() |>
+  as_gt() |>
+  cols_width(label ~ px(300)) |>
+  cols_align(columns = stat_0, 
+             align = "left")
+```

@@ -66,6 +66,11 @@ modeling. Daniel is the winner of the 2021 American Statistical
 Association (ASA) Innovation in Statistical Programming and Analytics
 award.
 
+[`r fontawesome::fa("link", fill = "#606060")`](https://www.danieldsjoberg.com/)
+[`r fontawesome::fa("mastodon", fill = "#606060")`](https://mastodon.social/@ddsjoberg)
+[`r fontawesome::fa("linkedin", fill = "#606060")`](https://www.linkedin.com/in/ddsjoberg/)
+[`r fontawesome::fa("github", fill = "#606060")`](https://github.com/ddsjoberg/)
+
 ![](images/becca.png){style="float:left;padding: 0 20px 0 20px;"
 fig-alt="Headshot of Becca Krouse" width="140"}
 

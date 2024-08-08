@@ -1,0 +1,150 @@
+# tbl_merge()/tbl_stack()
+
+## tbl_merge() for side-by-side tables
+
+::: {.columns}
+::: {.column width="50%"}
+A **univariable** table:
+
+```{r}
+tbl_uvsurv <- 
+  trial |> 
+  select(age, grade, death, ttdeath) |> 
+  tbl_uvregression(
+    method = coxph,
+    y = Surv(ttdeath, death),
+    exponentiate = TRUE
+  ) |> 
+  add_global_p()
+tbl_uvsurv
+```
+:::
+
+::: {.column width="50%"}
+A **multivariable** table:
+
+```{r}
+tbl_mvsurv <- 
+  coxph(
+    Surv(ttdeath, death) ~ age + grade, 
+    data = trial
+  ) |> 
+  tbl_regression(
+    exponentiate = TRUE
+  ) |> 
+  add_global_p() 
+tbl_mvsurv
+```
+
+:::
+:::
+
+## tbl_merge() for side-by-side tables
+
+```{r}
+tbl_merge(
+  list(tbl_uvsurv, tbl_mvsurv),
+  tab_spanner = c("**Univariable**", "**Multivariable**")
+)
+```
+
+## tbl_stack() to combine vertically
+
+::: {.columns}
+::: {.column width="50%"}
+A **univariable** table:
+
+```{r}
+tbl_uvsurv2 <-
+  coxph(Surv(ttdeath, death) ~ trt, 
+        data = trial) |>
+  tbl_regression(
+    show_single_row = trt,
+    label = trt ~ "Drug B vs A",
+    exponentiate = TRUE
+  )
+tbl_uvsurv2
+```
+:::
+
+::: {.column width="50%"}
+A **multivariable** table:
+
+```{r}
+tbl_mvsurv2 <-
+  coxph(Surv(ttdeath, death) ~ 
+          trt + grade + stage + marker, 
+        data = trial) |>
+  tbl_regression(
+    show_single_row = trt,
+    label = trt ~ "Drug B vs A",
+    exponentiate = TRUE, 
+    include = "trt"
+  )
+tbl_mvsurv2
+```
+
+:::
+:::
+
+## tbl_stack() to combine vertically
+
+```{r}
+#| output-location: "column"
+list(tbl_uvsurv2, tbl_mvsurv2) |>
+  tbl_stack(
+    group_header = 
+      c("Unadjusted", "Adjusted")
+  )
+```
+
+## tbl_strata() for stratified tables
+
+```{r}
+sm_trial |>
+  mutate(grade = paste("Grade", grade)) |>
+  tbl_strata(
+    strata = grade,
+    ~tbl_summary(.x, by = trt, missing = "no") |>
+      modify_header(all_stat_cols() ~ "**{level}**")
+  )
+```
+
+## Define custom function `tbl_cmh()`
+
+<p align="center"><img src="images/tbl_cmh.png" width=68%></p>
+
+## Define custom function `tbl_cmh()`
+
+<p align="center"><img src="images/tbl_cmh_markup.png" width=68%></p>
+
+## {gtreg} for regulatory submissions 
+
+::: {.columns}
+::: {.column width="80%"}
+* The {gtreg} package uses {gtsummary} to construct tables for regulatory agencies.
+
+* [https://shannonpileggi.github.io/gtreg/](https://shannonpileggi.github.io/gtreg/)
+:::
+
+::: {.column width="20%"}
+<img src="images/gtreg-logo.png" align="right" height="150" />
+:::
+:::
+
+
+
+```{r}
+#| output-location: "slide"
+gtreg::df_adverse_events |>
+  gtreg::tbl_ae(
+    id_df = gtreg::df_patient_characteristics,
+    id = patient_id,
+    ae = adverse_event,
+    soc = system_organ_class, 
+    by = grade, 
+    strata = trt
+  ) |>
+  modify_header(gtreg::all_ae_cols() ~ "**Grade {by}**") |> 
+  bold_labels()
+```
