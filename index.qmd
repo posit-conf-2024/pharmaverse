@@ -37,13 +37,36 @@ walk away with an understanding of how the pharmaverse can help their
 organization and where they can look to learn more about the right tools
 to support their needs.
 
-## Audience
+## Schedule
 
-ADD AUDIENCE INFO
+```{r}
+#| echo: false
+tibble::tribble(
+  ~time, ~desc,
+  "09:00 - 10:30", "Welcome<br><br>{admiral} and {xportr}",
+  "10:30 - 11:00", "*Coffee Break*",
+  "11:00 - 12:00", "[Introduction to tables](https://docs.google.com/presentation/d/1LLcsh02_6imhvLrvnvRmSV2MFijYmavg0MRh3eRMKMQ/pub?start=false&loop=false&delayms=60000)<br><br>Analysis Result Datasets",
+  "12:00 - 13:30", "*Lunch*",
+  "13:30 - 15:00", "{tfrmt}<br><br>{gtsummary}",
+  "15:00 - 15:30", "*Coffee Break*",
+  "15:30 - 17:00", "Recap, Discussion, and Read Out",
+) |> 
+  gt::gt() |> 
+  gt::cols_align(align = "left") |> 
+  gt::tab_style(
+    style = "vertical-align:top",
+    locations = gt::cells_body(columns = gt::everything())
+  ) |> 
+  gt::cols_label(time = gt::md("**Time**"), desc = gt::md("**Activity**")) |> 
+  gt::fmt_markdown()
+```
 
 ## Pre-work
 
-*Add items here we want attendees to complete before the conf.*
+- [ ] Sign up for a *free* [Posit Cloud](https://posit.cloud/) account.
+
+- [ ] Bring your laptop **and** charger to the workshop.
+
 
 ## Instructors
 
