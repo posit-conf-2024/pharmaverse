@@ -1,15 +1,5 @@
 [
   {
-    "objectID": "pre-conf-communication.html",
-    "href": "pre-conf-communication.html",
-    "title": "Pre-Conference Communications",
-    "section": "",
-    "text": "August 7, 2024\nHello everyone! We are excited to spend the day with you for the Flavors of the Pharmaverse workshop at posit::conf on Monday, August 12!\nIn this workshop, we’ll give a high level overview of the scope and tools available within the Pharmaverse for the clinical pipeline, focusing on ADaMs through outputs. Our hope is that you will walk away with an understanding of how there are different paradigms and pathways through the pharmaverse. A basic understanding of R and tidyverse is expected for this workshop. More information about the workshop can be found here: https://posit-conf-2024.github.io/pharmaverse/ (will be updated up to the workshop).\nFor the day to run smoothly, please be sure to bring your own laptop and charger so you can follow along and do the exercises. We will be using Posit Cloud, so you don’t need to worry about getting anything installed on your computer. Just make sure you have a free Posit Cloud account before the workshop starts.\nDuring the workshop, we will be using Slack as our main communication method. A link to our dedicated Slack channel will be sent to your email separately – please keep an eye out for that! If you have any questions before the workshop, please feel free to drop them in the Slack channel.\nYour instructors,\nAndrew, Becca, Casey, Daniel, and Ellis",
-    "crumbs": [
-      "Communications"
-    ]
-  },
-  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Flavors of the pharmaverse",
@@ -30,11 +20,11 @@
     ]
   },
   {
-    "objectID": "index.html#audience",
-    "href": "index.html#audience",
+    "objectID": "index.html#schedule",
+    "href": "index.html#schedule",
     "title": "Flavors of the pharmaverse",
-    "section": "Audience",
-    "text": "Audience\nADD AUDIENCE INFO",
+    "section": "Schedule",
+    "text": "Schedule\n\n\n\n\n\n\n\n\n\n\n\n\nTime\nActivity\n\n\n\n\n09:00 - 10:30\nWelcome{admiral} and {xportr}\n\n\n10:30 - 11:00\nCoffee Break\n\n\n11:00 - 12:00\nIntroduction to tablesAnalysis Result Datasets\n\n\n12:00 - 13:30\nLunch\n\n\n13:30 - 15:00\n{tfrmt}{gtsummary}\n\n\n15:00 - 15:30\nCoffee Break\n\n\n15:30 - 17:00\nRecap, Discussion, and Read Out",
     "crumbs": [
       "Home"
     ]
@@ -44,7 +34,7 @@
     "href": "index.html#pre-work",
     "title": "Flavors of the pharmaverse",
     "section": "Pre-work",
-    "text": "Pre-work\nAdd items here we want attendees to complete before the conf.",
+    "text": "Pre-work\n\nSign up for a free Posit Cloud account.\nBring your laptop and charger to the workshop.",
     "crumbs": [
       "Home"
     ]
@@ -67,6 +57,16 @@
     "text": "This work is licensed under a Creative Commons Attribution 4.0 International License.",
     "crumbs": [
       "License"
+    ]
+  },
+  {
+    "objectID": "pre-conf-communication.html",
+    "href": "pre-conf-communication.html",
+    "title": "Pre-Conference Communications",
+    "section": "",
+    "text": "August 7, 2024\nHello everyone! We are excited to spend the day with you for the Flavors of the Pharmaverse workshop at posit::conf on Monday, August 12!\nIn this workshop, we’ll give a high level overview of the scope and tools available within the Pharmaverse for the clinical pipeline, focusing on ADaMs through outputs. Our hope is that you will walk away with an understanding of how there are different paradigms and pathways through the pharmaverse. A basic understanding of R and tidyverse is expected for this workshop. More information about the workshop can be found here: https://posit-conf-2024.github.io/pharmaverse/ (will be updated up to the workshop).\nFor the day to run smoothly, please be sure to bring your own laptop and charger so you can follow along and do the exercises. We will be using Posit Cloud, so you don’t need to worry about getting anything installed on your computer. Just make sure you have a free Posit Cloud account before the workshop starts.\nDuring the workshop, we will be using Slack as our main communication method. A link to our dedicated Slack channel will be sent to your email separately – please keep an eye out for that! If you have any questions before the workshop, please feel free to drop them in the Slack channel.\nYour instructors,\nAndrew, Becca, Casey, Daniel, and Ellis",
+    "crumbs": [
+      "Communications"
     ]
   }
 ]
