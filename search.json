@@ -4,7 +4,7 @@
     "href": "pre-conf-communication.html",
     "title": "Pre-Conference Communications",
     "section": "",
-    "text": "Add copies of the emails we send to attendees here. Then anyone who registers late will also have access to the information.",
+    "text": "August 7, 2024\nHello everyone! We are excited to spend the day with you for the Flavors of the Pharmaverse workshop at posit::conf on Monday, August 12!\nIn this workshop, we’ll give a high level overview of the scope and tools available within the Pharmaverse for the clinical pipeline, focusing on ADaMs through outputs. Our hope is that you will walk away with an understanding of how there are different paradigms and pathways through the pharmaverse. A basic understanding of R and tidyverse is expected for this workshop. More information about the workshop can be found here: https://posit-conf-2024.github.io/pharmaverse/ (will be updated up to the workshop).\nFor the day to run smoothly, please be sure to bring your own laptop and charger so you can follow along and do the exercises. We will be using Posit Cloud, so you don’t need to worry about getting anything installed on your computer. Just make sure you have a free Posit Cloud account before the workshop starts.\nDuring the workshop, we will be using Slack as our main communication method. A link to our dedicated Slack channel will be sent to your email separately – please keep an eye out for that! If you have any questions before the workshop, please feel free to drop them in the Slack channel.\nYour instructors,\nAndrew, Becca, Casey, Daniel, and Ellis",
     "crumbs": [
       "Communications"
     ]
