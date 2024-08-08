@@ -158,7 +158,7 @@ tbl_summary(
     ),
   label = 
     grade ~ "Pathologic tumor grade",
-  digits = age ~ 1
+  digits = age ~ list(sd = 1) # report SD(age) to one decimal place
 )
 ```
 
@@ -182,6 +182,7 @@ tbl_summary(
 
 ## {gtsummary} + formulas
 
+This syntax is also used in {cards}, {cardx}, and {gt}.
 <p align="center">
 
 <img src="https://raw.githubusercontent.com/ddsjoberg/gtsummary-weill-cornell-presentation/5887c81b58f4ed0c76f6ae458243e9c2a2fbbcd2/Images/Dan-SummaryTables-5.png" width="95%"/>
@@ -334,22 +335,6 @@ show_header_names(tbl)
 `all_stat_cols()` selects columns `"stat_1"` and `"stat_2"`
 :::
 
-## Exercise 2
-
-1.  Create a summary table split by whether or not the participant quit smoking or not.
-
-2.  Include all variables in the table except the study outcome: death.
-
-3.  Consider using gtsummary functions that `add_*()`, `modify_*()` or style your summary table.
-
-    -   `tbl_summary()` tutorial for reference: [https://www.danieldsjoberg.com/gtsummary/articles/tbl_summary.html](https://www.danieldsjoberg.com/gtsummary/articles/tbl_summary.html)
-
-```{r}
-#| echo: false
-#| cache: false
-countdown(minutes = 8)
-```
-
 ## Update tbl_summary() with add\_\*()
 
 ```{r}
@@ -394,6 +379,31 @@ sm_trial |>
 :::
 :::
 
+## Where are the ARDs?
+
+::: {.columns .v-center-container}
+::: {.column width="30%"}
+
+- ARDs are the backbone for all calculations in gtsummary
+
+- Every gtsummary table saves the ARDs from each calculation
+
+- They can be extracted individually, or combined.
+
+:::
+
+::: {.column width="70%"}
+
+```{r}
+#| label: 'summary-view-ard'
+tbl <- tbl_summary(trial, by = trt) |> add_p()
+class(tbl$cards)
+names(tbl$cards)
+tbl$cards[["add_p"]][["age"]]
+```
+
+:::
+:::
 
 ## Add-on functions in {gtsummary}
 
@@ -402,6 +412,22 @@ And many more!
 See the documentation at <http://www.danieldsjoberg.com/gtsummary/reference/index.html>
 
 And a detailed `tbl_summary()` vignette at <http://www.danieldsjoberg.com/gtsummary/articles/tbl_summary.html>
+
+## Exercise 1
+
+1.  Create a summary table split by whether or not the participant quit smoking or not.
+
+2.  Include all variables in the table except the study outcome: death.
+
+3.  Consider using gtsummary functions that `add_*()`, `modify_*()` or style your summary table.
+
+    -   `tbl_summary()` tutorial for reference: [https://www.danieldsjoberg.com/gtsummary/articles/tbl_summary.html](https://www.danieldsjoberg.com/gtsummary/articles/tbl_summary.html)
+
+```{r}
+#| echo: false
+#| cache: false
+countdown(minutes = 10)
+```
 
 ## Cross-tabulation with tbl_cross()
 
@@ -436,56 +462,22 @@ sm_trial |>
   )
 ```
 
-## Survey data with tbl_svysummary()
+## Wide Summaries with tbl_wide_summary()
+
+`tbl_wide_summary()` summarizes a continuous variable with summary statistics spread across columns
 
 ```{r}
-#| label: 'tbl_svysummary'
+#| label: 'tbl_wide_summary'
 #| output-location: "column"
-survey::svydesign(
-  ids = ~1, 
-  data = as.data.frame(Titanic), 
-  weights = ~Freq
-) |>
-  tbl_svysummary(
-    by = Survived,
-    include = c(Class, Sex)
-  ) |>
-  add_p() |>
-  modify_spanning_header(
-    all_stat_cols() ~ "**Survived**")
+trial |>
+  tbl_wide_summary(include = c(response, grade))
 ```
 
-## Survival outcomes with tbl_survfit()
+## Wide Summaries with tbl_wide_summary()
 
 ```{r}
-#| label: 'tbl_survfit'
-library(survival)
-fit <- survfit(Surv(ttdeath, death) ~ trt, trial)
-
-tbl_survfit(
-  fit, 
-  times = c(12, 24),
-  label_header = "**{time} Month**"
-) |>
-  add_p()
-```
-
-## Exercise 3
-
-Is there a difference in death rates by smoking status?
-
-1.  Using `tbl_summary()` report the death rates by smoking status.
-
-2.  Add the (unadjusted) difference in death rates by smoking status using `add_difference()`.
-
-3.  Produce a second table that reports an *adjusted* difference in death rates.
-
-    -   The rate will be adjusted for all covariates in the data frame.
-    -   Review the tests available at <https://www.danieldsjoberg.com/gtsummary/reference/tests.html>.
-    -   Let me know if you'd like a hint as to which test to use. It'll be one that takes advantage of `adj.vars`.
-
-```{r}
-#| echo: false
-#| cache: false
-countdown(minutes = 8)
+#| label: 'tbl_wide_summary'
+#| output-location: "column"
+trial |>
+  tbl_wide_summary(include = c(age, marker))
 ```

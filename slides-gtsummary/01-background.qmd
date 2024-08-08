@@ -43,3 +43,17 @@
 -   Choose from different [print engines]{.emphasis}
 :::
 :::
+
+
+## {gtsummary} overview
+
+For our workshop, we will focus on the following summary types as well as [themes]{.emphasis} and  [print engines]{.emphasis}.
+
+- `tbl_summary()`
+
+- `tbl_cross()`
+
+- `tbl_continuous()`
+
+- `tbl_wide_summary()`
+

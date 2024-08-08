@@ -12,7 +12,6 @@ format:
     chalkboard: true
 execute:
   echo: true
-  output: asis
 ---
 
 {{< include 00-setup.qmd >}}

@@ -46,19 +46,3 @@ tibble(
 ```
 :::
 :::
-
-## Exercise 1
-
-As an exercise, we'll prepare data, data summaries, analyses, and a brief write-up of the results.
-
-1.  Download zip file with exercises with [this link](https://github.com/ddsjoberg/clinical-reporting-gtsummary-rmed/raw/main/exercises/exercises.zip).
-
-2.  Extract the zip file locally and open in an RStudio project. You can unzip the file with your system utilities, or with `zip::unzip()`. Unzip the files into their own folder!
-
-3.  Add variable labels to the data frame using `labelled::set_variable_labels()`.
-
-```{r}
-#| echo: false
-#| cache: false
-countdown(minutes = 8, font_size = "1.5em")
-```
