@@ -43,11 +43,17 @@ to support their needs.
 #| echo: false
 tibble::tribble(
   ~time, ~desc,
-  "09:00 - 10:30", "Welcome<br><br>{admiral} and {xportr}",
+  "09:00 - 10:30", "Welcome
+                    <br><br>
+                    {admiral} and {xportr}",
   "10:30 - 11:00", "*Coffee Break*",
-  "11:00 - 12:00", "[Introduction to tables](https://docs.google.com/presentation/d/1LLcsh02_6imhvLrvnvRmSV2MFijYmavg0MRh3eRMKMQ/pub?start=false&loop=false&delayms=60000)<br><br>Analysis Result Datasets",
+  "11:00 - 12:00", "[Introduction to tables](https://docs.google.com/presentation/d/1LLcsh02_6imhvLrvnvRmSV2MFijYmavg0MRh3eRMKMQ/pub?start=false&loop=false&delayms=60000)
+                    <br><br>
+                    Analysis Result Datasets",
   "12:00 - 13:30", "*Lunch*",
-  "13:30 - 15:00", "{tfrmt}<br><br>{gtsummary}",
+  "13:30 - 15:00", "{tfrmt}
+                    <br><br>
+                    {gtsummary}",
   "15:00 - 15:30", "*Coffee Break*",
   "15:30 - 17:00", "Recap, Discussion, and Read Out",
 ) |> 
