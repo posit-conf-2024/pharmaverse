@@ -1,1 +1,7 @@
-Add materials for your workshop in this folder. You can then remove this README, and rename this folder if you prefer.
+
+# posit::conf(2024) Pharmaverse Workshop
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of workshop is to https://github.com/posit-conf-2024/pharmaverse
