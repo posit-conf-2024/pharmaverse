@@ -78,7 +78,7 @@ tfrmt_demog <- tfrmt_demog |>
         frmt_combine("{n} ({p}%)",
                      n = frmt("xx"),
                      p = frmt_when(
-                       "<0.1" ~ "<1",
+                       "<0.01" ~ "<1",
                        TRUE ~ frmt("xx", transform = ~.*100)))
     )
   )
