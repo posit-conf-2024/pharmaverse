@@ -83,11 +83,15 @@ ard_ae <- readRDS("materials/3-Tables/data/tfrmt_ard_ae.rds")
 
 ard_ae <- ard_ae |>
   dplyr::mutate(group3 = ifelse(variable=="any_ae", "AESOC", group3),
-                group3_level = ifelse(variable=="any_ae", "ANY ADVERSE EVENT", group3_level))|>
+         group3_level = ifelse(variable=="any_ae", "ANY ADVERSE EVENT", group3_level))|>
   shuffle_ard() |>
-  dplyr::mutate(label = ifelse(variable=="any_ae", "ANY ADVERSE EVENT", label)) |>
-  dplyr::mutate(stat_name = ifelse(variable=="TRT01A" & stat_name=="n", "bigN", stat_name)) |>
-  dplyr::filter(!(variable!="TRT01A" & stat_name=="N"))
+  dplyr::mutate(label = ifelse(variable=="any_ae", "ANY ADVERSE EVENT", label),
+         stat_name = ifelse(variable=="TRT01A" & stat_name=="n", "bigN", stat_name),
+         stat = ifelse(stat_name=="p", stat*100, stat)) |>
+  dplyr::filter(!(variable!="TRT01A" & stat_name=="N")) |>
+  dplyr::mutate(ord1 = ifelse(variable=="any_ae", 1, ifelse(variable=="AESOC", 2, 3)),
+         ord2 = as.numeric(as.factor(AESOC)),
+         ord3 = as.numeric(as.factor(label)))
 
 tfrmt_n_pct(n = "n", pct = "p") |>
   tfrmt(group = AESOC,
@@ -95,8 +99,9 @@ tfrmt_n_pct(n = "n", pct = "p") |>
         param = stat_name,
         value = stat,
         column = c(TRT01A, AESEV),
+        sorting_cols = c(ord1, ord2, ord3),
         col_plan = col_plan(
-          -context, -variable
+          -context, -variable, -starts_with("ord")
         ),
         big_n = big_n_structure(param_val = "bigN")) |>
   print_mock_gt(ard_ae) |>
