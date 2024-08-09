@@ -109,8 +109,9 @@ print_to_gt(tfrmt_demog, ard_demog2)
 
 ## B. Save the tfrmt as JSON (hint: use `tfrmt_to_json`)
 # export both the ARD and JSON files to your desktop
-tfrmt_to_json(tfrmt_demog, "tfrmt_demog.json")
-saveRDS(ard_demog2, "ard_demog2.rds")
+tfrmt_to_json(tfrmt_demog, "materials/3-Tables/export/tfrmt_demog.json")
+saveRDS(ard_demog2, "materials/3-Tables/export/ard_demog2.rds")
+
 
 ## C. Use the tfrmtbuilder app to:
 #     - Toggle *off* mock mode
