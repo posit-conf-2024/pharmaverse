@@ -1,0 +1,62 @@
+# Do I need this?
+
+## How it started
+
+::: {.columns .v-center-container}
+::: {.column width="60%"}
+
+- Began to address reproducible issues in research while I was working in academia
+
+- Goal was to build a package to summarize study results with code that was [both simple and customizable]{.emphasis}
+
+- First release in May 2019
+
+  - [1,000,000+ installations]{.emphasis} from CRAN
+  - 1000+ GitHub stars
+  - 300+ contributors 
+  - ~50 code contributors
+
+:::
+::: {.column width="40%"}
+
+<img src="images/gtsummary-logo.png" width="650"/>
+
+:::
+:::
+
+
+## {gtsummary} overview
+
+::: {.columns}
+::: {.column width="50%"}
+-   Create [tabular summaries]{.emphasis} with sensible defaults but highly customizable
+-   Types of summaries:
+    -   Demographic- or "Table 1"-types
+    -   Cross-tabulation
+    -   Regression models
+    -   Survival data
+    -   Survey data
+    -   Custom tables
+:::
+
+::: {.column width="50%"}
+-   Report statistics from {gtsummary} tables [inline]{.emphasis} in R Markdown
+-   Stack and/or merge any table type
+-   Use [themes]{.emphasis} to standardize across tables
+-   Choose from different [print engines]{.emphasis}
+:::
+:::
+
+
+## {gtsummary} overview
+
+For our workshop, we will focus on the following summary types as well as [themes]{.emphasis} and  [print engines]{.emphasis}.
+
+- `tbl_summary()`
+
+- `tbl_cross()`
+
+- `tbl_continuous()`
+
+- `tbl_wide_summary()`
+

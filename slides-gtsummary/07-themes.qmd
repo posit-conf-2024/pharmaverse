@@ -1,0 +1,164 @@
+# {gtsummary} themes
+
+## {gtsummary} theme basics
+
+- A [theme]{.emphasis} is a set of customization preferences that can be easily set and reused. 
+
+- Themes control [default settings for existing functions]{.emphasis}
+
+- Themes control more [fine-grained customization]{.emphasis} not available via arguments or helper functions
+
+- Easily use one of the [available themes]{.emphasis}, or [create your own]{.emphasis}
+
+## {gtsummary} default theme
+
+```{r}
+#| output-location: "column"
+reset_gtsummary_theme()
+
+trial |> 
+  tbl_summary(
+    by = trt, 
+    include = c(age, response)
+  ) |>
+  modify_caption(
+    "Default Theme"
+  )
+```
+
+## {gtsummary} theme_gtsummary_journal()
+
+```{r}
+#| output-location: "column"
+reset_gtsummary_theme()
+theme_gtsummary_journal(journal = "jama")
+
+trial |> 
+  tbl_summary(
+    by = trt, 
+    include = c(age, response)
+  ) |>
+  modify_caption(
+    "Journal Theme (JAMA)"
+  )
+```
+
+## {gtsummary} theme_gtsummary_language()
+
+```{r}
+#| output-location: "column"
+reset_gtsummary_theme()
+theme_gtsummary_language(language = "zh-tw")
+
+trial |> 
+  tbl_summary(
+    by = trt, 
+    include = c(age, response)
+  ) |>
+  add_p() |> 
+  modify_caption(
+    "Language Theme (Chinese)"
+  )
+```
+
+**Language options:**
+
+:::{.columns style="font-size:0.65em"}
+::: {.column width="30%"}
+
+- German 
+- English
+- Spanish 
+- French 
+- Gujarati
+- Hindi
+
+::: 
+
+::: {.column width="30%"}
+- Icelandic
+- Japanese
+- Korean
+- Marathi
+- Dutch
+
+:::
+
+::: {.column width="30%"}
+- Norwegian
+- Portuguese
+- Swedish
+- Chinese Simplified
+- Chinese Traditional
+:::
+:::
+
+## {gtsummary} theme_gtsummary_compact()
+
+```{r}
+reset_gtsummary_theme()
+theme_gtsummary_compact()
+
+trial |> 
+  tbl_summary(
+    by = trt, 
+    include = c(age, response)
+  ) |>
+  modify_caption("Compact Theme")
+```
+
+*Reduces padding and font size*
+
+## A pharma theme?
+
+While not yet exported from gtsummary, we can create a theme for tables that look more like what we expect in pharma.
+
+- Fixed-width font
+
+- Continuous variable summaries default to multi-line
+
+- Function for rounding percentages includes leading white space
+
+- Default right alignment on summary statistics
+
+```{r}
+#| echo: false
+theme_gtsummary_compact()
+cards::ADSL |>
+  dplyr::select(ARM, AGE, AGEGR1, SEX) |>
+  dplyr::mutate(
+    ARM = factor(ARM, levels = c("Placebo", "Xanomeline Low Dose", "Xanomeline High Dose")),
+    # AGEGR1 = factor(AGEGR1, levels = c("<65", "65-80", ">80"), labels = c("&lt;65", "65-80", ">80"))
+    AGEGR1 = factor(AGEGR1, levels = c("<65", "65-80", ">80"), labels = c("<65", "65-80", ">80"))
+  ) |>
+  tbl_summary(
+    by = ARM,
+    type = AGE ~ "continuous2",
+    statistic = AGE ~ c("{median} ({p25}, {p75})", "{mean} ({sd})", "{min} - {max}"),
+    value = SEX ~ "F",
+    label = list(SEX = "Female", AGEGR1 = "Age Group"),
+    digits = list(all_categorical() ~ list(p = cards::alias_as_fmt_fn("xx.x%")),
+                  all_continuous() ~ 1L)
+  ) |>
+  add_stat_label() |>
+  bold_labels() |>
+  modify_header(all_stat_cols() ~ "**{level}**  \nN = {n}") |>
+  modify_column_alignment(columns = -label, "right") |>
+  as_gt() |>
+  gt::cols_width(gtsummary::all_stat_cols() ~ gt::pct(23)) |>
+  gt::opt_table_font(stack = "monospace-code")
+```
+
+## {gtsummary} set_gtsummary_theme()
+
+
+* `set_gtsummary_theme()` to use a custom theme.
+
+* See the {gtsummary} + themes vignette for examples
+
+[http://www.danieldsjoberg.com/gtsummary/articles/themes.html](http://www.danieldsjoberg.com/gtsummary/articles/themes.html)
+
+```{r}
+#| echo: false
+reset_gtsummary_theme()
+```

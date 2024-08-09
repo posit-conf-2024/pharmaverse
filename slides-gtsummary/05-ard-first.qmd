@@ -1,0 +1,112 @@
+# ARD-first tables
+
+## ARD-first Tables
+
+Similar to functions that accept a data frame, the package exports functions with nearly identical APIs that accept an ARD.
+
+::: columns
+::: {.column width="50%"}
+
+```r
+tbl_summary()
+
+tbl_continuous()
+
+tbl_wide_summary()
+```
+
+:::
+::: {.column width="50%"}
+
+```r
+tbl_ard_summary()
+
+tbl_ard_continuous()
+
+tbl_ard_wide_summary()
+```
+
+:::
+:::
+
+## ARD-first Tables
+
+We can use the skills we learned earlier today to create ARDs for gtsummary tables.
+
+```{r}
+#| label: 'ard_stack'
+#| output-location: "column"
+library(cards)
+
+ard <- ard_stack(
+  data = trial, 
+  ard_continuous(variables = age),
+  ard_categorical(variables = grade),
+  ard_dichotomous(variables = response),
+  # add these for best-looking tables
+  .attributes = TRUE, 
+  .missing = TRUE 
+)
+ard
+```
+
+::: aside
+The `.attributes=TRUE` call adds column attributes, like labels, to the ARD table, which leads to better defaults by displaying the column labels in the table.
+:::
+
+## ARD-first Tables
+
+We can simply use the ARD from the previous slide, and pass it to `tbl_ard_summary()` for a summary table.
+
+```{r}
+#| label: 'tbl_ard_summary'
+#| output-location: "column"
+
+tbl_ard_summary(ard)
+```
+
+
+## ARD-first Tables
+
+Now let's try a somewhat more complicated table.
+
+```{r}
+#| label: 'tbl_ard_summary2'
+#| output-location: "slide"
+#| code-line-numbers: "|2|4|7|17|18|19|21"
+trial |> 
+  labelled::set_variable_labels(age = "Age, years") |> 
+  ard_stack( 
+    .by = trt,
+    ard_continuous(
+      variables = age,
+      fmt_fn = age ~ list(sd = 2)
+    ),
+    ard_categorical(variables = grade),
+    ard_dichotomous(variables = response),
+    # add these for best-looking tables
+    .attributes = TRUE, 
+    .missing = TRUE 
+  ) |> 
+  tbl_ard_summary(
+    by = trt,
+    type = all_continuous() ~ "continuous2",
+    statistic = all_continuous() ~ c("{mean} ({sd})", "{min} - {max}"),
+    missing = "no"
+  ) |> 
+  modify_caption("**Table 1. Subject Demographics**")
+```
+
+## {gtsummary} Exercise 2
+
+1. Navigate to Posit Cloud script `04-gtsummary_exercise2.R`.
+
+2. Create the table outlined in the script.
+
+3. Add the "completed" sticky note to your laptop when complete.
+
+```{r}
+#| echo: false
+#| cache: false
+countdown(minutes = 10)
+```

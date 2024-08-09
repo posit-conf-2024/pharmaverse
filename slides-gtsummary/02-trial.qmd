@@ -1,0 +1,48 @@
+## Example Dataset
+
+::: {.columns .v-center-container}
+::: {.column width="40%"}
+-   The `trial` data set is included with {gtsummary}
+
+-   Simulated data set of baseline characteristics for 200 patients who receive Drug A or Drug B
+
+-   Variables were assigned labels using the `labelled` package
+:::
+
+::: {.column width="60%"}
+```{r}
+#| label: 'describe-trial'
+#| message: false
+library(gtsummary)
+library(tidyverse)
+head(trial) |> gt::gt()
+```
+:::
+:::
+
+## Example Dataset
+
+::: {.columns .v-center-container}
+::: {.column width="60%"}
+This presentation will use a subset of the variables.
+
+```{r}
+#| label: 'create-small-trial'
+sm_trial <-
+  trial |> 
+  select(trt, age, grade, response)
+```
+:::
+
+::: {.column width="40%"}
+```{r}
+#| echo: false
+#| label: 'describe-small-trial'
+tibble(
+  Variable = names(sm_trial),
+  Label = map_chr(Variable, ~attr(trial[[.x]], "label"))
+) |> 
+  gt::gt()
+```
+:::
+:::

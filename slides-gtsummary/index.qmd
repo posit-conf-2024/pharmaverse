@@ -1,0 +1,34 @@
+---
+title: "Pharmaverse Phlavors: gtsummary + ARD"
+author: "Daniel D. Sjoberg"
+footer:  "[Pharmaverse Workshop (pos.it/pharmaverse_24)](https://posit-conf-2024.github.io/pharmaverse/)"
+logo: "images/gtsummary-logo.png"
+editor: source
+format: 
+  revealjs: 
+    theme: slides.scss
+    transition: fade
+    slide-number: true
+    chalkboard: true
+execute:
+  echo: true
+---
+
+{{< include 00-setup.qmd >}}
+
+{{< include 01-background.qmd >}}
+
+{{< include 02-trial.qmd >}}
+
+{{< include 03-tbl_summary.qmd >}}
+
+{{< include 04-tbl_merge.qmd >}}
+
+{{< include 05-ard-first.qmd >}}
+
+{{< include 07-themes.qmd >}}
+
+{{< include 08-print_engines.qmd >}}
+
+{{< include 09-summary.qmd >}}
+

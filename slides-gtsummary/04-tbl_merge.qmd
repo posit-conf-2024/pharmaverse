@@ -1,0 +1,90 @@
+# tbl_merge()/tbl_stack()
+
+## tbl_merge() for side-by-side tables
+
+```{r}
+#| label: 'tbl_merge'
+tbl_n <- 
+  tbl_summary(trial, include = grade, statistic = grade ~ "{n}") |> 
+  modify_header(all_stat_cols() ~ "**N**") |> # update column header
+  modify_footnote(all_stat_cols() ~ NA) # remove footnote
+tbl_age <-
+  tbl_continuous(trial, include = grade, variable = age, by = trt) |> 
+  modify_header(all_stat_cols() ~ "**{level}**") # update header
+
+# combine the tables side by side
+list(tbl_n, tbl_age) |> 
+  tbl_merge(tab_spanner = FALSE) # suppress default header
+```
+
+## tbl_stack() to combine vertically
+
+```{r}
+#| label: 'tbl_stack'
+tbl_drug_a <- trial |> 
+  dplyr::filter(trt == "Drug A") |> 
+  tbl_summary(include = c(response, death), missing = "no")
+tbl_drug_b <- trial |> 
+  dplyr::filter(trt == "Drug B") |> 
+  tbl_summary(include = c(response, death), missing = "no")
+
+# stack the two tables 
+list(tbl_drug_a, tbl_drug_b) |> 
+  tbl_stack(group_header = c("Drug A", "Drug B")) |> # optionally include headers for each table
+  modify_header(all_stat_cols() ~ "**Outcome Rates**")
+```
+
+## tbl_strata() for stratified tables
+
+```{r}
+tbl_strata(
+  trial, 
+  strata = trt, 
+  ~ .x |> 
+    tbl_wide_summary(include = c(response, death))
+)
+```
+
+The default is to combine stratified tables with `tbl_merge()`.
+
+
+## tbl_strata() for stratified tables
+
+We can also stack the tables.
+
+```{r}
+tbl_strata(
+  trial, 
+  strata = trt, 
+  ~ .x |> 
+    tbl_wide_summary(include = c(response, death)),
+  .combine_with = "tbl_stack"
+)
+```
+
+## Define custom function `tbl_cmh()`
+
+<p align="center"><img src="images/tbl_cmh.png" width=68%></p>
+
+## Define custom function `tbl_cmh()`
+
+<p align="center"><img src="images/tbl_cmh_markup.png" width=68%></p>
+
+## Cobbling Tables Together
+
+::: small
+
+- Most of the tables we create in the pharma space come from a catalog of standard tables.
+
+- Custom or one-off tables are often quite difficult and time intensive to create.
+
+- The {gtsummary} package makes it simple to break complex tables into their simple parts and cobble them together in the end.
+
+- Moreover, the internal structure of a gtsummary table is super simple: a data frame and instructions on how to print that data frame to make it cute.
+If needed, you can directly modify the underlying data frame with `modify_table_body()`.
+
+::: 
+
+```{r}
+trial |> tbl_summary(include = c(age, grade), by = trt) |> purrr::pluck("table_body")
+```

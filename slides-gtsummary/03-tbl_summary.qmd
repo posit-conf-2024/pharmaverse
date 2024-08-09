@@ -1,0 +1,489 @@
+# tbl_summary()
+
+## Basic tbl_summary()
+
+::: columns
+::: {.column width="50%"}
+```{r}
+#| label: 'simple-summary'
+sm_trial |> 
+  select(-trt) |>  
+  tbl_summary()
+```
+:::
+
+::: {.column width="50%"}
+-   Four types of summaries: `continuous`, `continuous2`, `categorical`, and `dichotomous`
+
+-   Statistics are `median (IQR)` for continuous, `n (%)` for categorical/dichotomous
+
+-   Variables coded `0/1`, `TRUE/FALSE`, `Yes/No` treated as dichotomous
+
+-   Lists `NA` values under "Unknown"
+
+-   Label attributes are printed automatically
+:::
+:::
+
+## Customize tbl_summary() output {auto-animate="true"}
+
+```{r}
+#| output-location: "column"
+#| label: 'customize-summary1'
+tbl_summary(
+  sm_trial,
+  by = trt,
+)
+```
+
+::: small
+::: columns
+::: {.column width="50%"}
+-   `by`: specify a column variable for cross-tabulation
+:::
+
+::: {.column width="50%"}
+:::
+:::
+:::
+
+## Customize tbl_summary() output {auto-animate="true"}
+
+```{r}
+#| output-location: "column"
+#| label: 'customize-summary2'
+tbl_summary(
+  sm_trial,
+  by = trt,
+  type = age ~ "continuous2",
+)
+```
+
+::: small
+::: columns
+::: {.column width="50%"}
+-   `by`: specify a column variable for cross-tabulation
+
+-   `type`: specify the summary type
+:::
+
+::: {.column width="50%"}
+:::
+:::
+:::
+
+## Customize tbl_summary() output {auto-animate="true"}
+
+```{r}
+#| output-location: "column"
+#| label: 'customize-summary3'
+tbl_summary(
+  sm_trial,
+  by = trt,
+  type = age ~ "continuous2",
+  statistic = 
+    list(
+      age ~ c("{mean} ({sd})", 
+              "{min}, {max}"), 
+      response ~ "{n} / {N} ({p}%)"
+    ),
+)
+```
+
+::: small
+::: columns
+::: {.column width="50%"}
+-   `by`: specify a column variable for cross-tabulation
+
+-   `type`: specify the summary type
+
+-   `statistic`: customize the reported statistics
+:::
+
+::: {.column width="50%"}
+:::
+:::
+:::
+
+## Customize tbl_summary() output {auto-animate="true"}
+
+```{r}
+#| output-location: "column"
+#| label: 'customize-summary4'
+tbl_summary(
+  sm_trial,
+  by = trt,
+  type = age ~ "continuous2",
+  statistic = 
+    list(
+      age ~ c("{mean} ({sd})", 
+              "{min}, {max}"), 
+      response ~ "{n} / {N} ({p}%)"
+    ),
+  label = 
+    grade ~ "Pathologic tumor grade",
+)
+```
+
+::: small
+::: columns
+::: {.column width="50%"}
+-   `by`: specify a column variable for cross-tabulation
+
+-   `type`: specify the summary type
+
+-   `statistic`: customize the reported statistics
+:::
+
+::: {.column width="50%"}
+-   `label`: change or customize variable labels
+:::
+:::
+:::
+
+## Customize tbl_summary() output {auto-animate="true"}
+
+```{r}
+#| output-location: "column"
+#| label: 'customize-summary5'
+tbl_summary(
+  sm_trial,
+  by = trt,
+  type = age ~ "continuous2",
+  statistic = 
+    list(
+      age ~ c("{mean} ({sd})", 
+              "{min}, {max}"), 
+      response ~ "{n} / {N} ({p}%)"
+    ),
+  label = 
+    grade ~ "Pathologic tumor grade",
+  digits = age ~ list(sd = 1) # report SD(age) to one decimal place
+)
+```
+
+::: small
+::: columns
+::: {.column width="50%"}
+-   `by`: specify a column variable for cross-tabulation
+
+-   `type`: specify the summary type
+
+-   `statistic`: customize the reported statistics
+:::
+
+::: {.column width="50%"}
+-   `label`: change or customize variable labels
+
+-   `digits`: specify the number of decimal places for rounding
+:::
+:::
+:::
+
+## {gtsummary} + formulas
+
+This syntax is also used in {cards}, {cardx}, and {gt}.
+<p align="center">
+
+<img src="https://raw.githubusercontent.com/ddsjoberg/gtsummary-weill-cornell-presentation/5887c81b58f4ed0c76f6ae458243e9c2a2fbbcd2/Images/Dan-SummaryTables-5.png" width="95%"/>
+
+</p>
+
+**Named list are OK too!** `label = list(age = "Patient Age")`
+
+## 
+
+### {gtsummary} selectors
+
+- Use the following helpers to [select groups of variables]{.emphasis}: `all_continuous()`, `all_categorical()`
+
+- Use `all_stat_cols()` to select the [summary statistic columns]{.emphasis}
+
+### Add-on functions in {gtsummary}
+
+`tbl_summary()` objects can also be updated using related functions.
+
+-   `add_*()` add [additional column]{.emphasis} of statistics or information, e.g. p-values, q-values, overall statistics, treatment differences, N obs., and more
+
+-   `modify_*()` [modify]{.emphasis} table headers, spanning headers, footnotes, and more
+
+-   `bold_*()/italicize_*()` [style]{.emphasis} labels, variable levels, significant p-values
+
+## Update tbl_summary() with add\_\*()
+
+```{r}
+#| output-location: "column"
+#| code-line-numbers: "5,6"
+#| label: 'summary-with-p'
+sm_trial |>
+  tbl_summary(
+    by = trt
+  ) |> 
+  add_p() |> 
+  add_q(method = "fdr")
+```
+
+-   `add_p()`: adds a column of p-values
+
+-   `add_q()`: adds a column of p-values adjusted for multiple comparisons through a call to `p.adjust()`
+
+## Update tbl_summary() with add\_\*()  {auto-animate="true"}
+
+```{r}
+#| label: 'summary-with-overall1'
+#| output-location: "column"
+#| code-line-numbers: "6"
+sm_trial |>
+  tbl_summary(
+    by = trt,
+    missing = "no"
+  ) |> 
+  add_overall()
+```
+
+-   `add_overall()`: adds a column of overall statistics
+
+## Update tbl_summary() with add\_\*()  {auto-animate="true"}
+
+```{r}
+#| label: 'summary-with-overall2'
+#| output-location: "column"
+#| code-line-numbers: "7"
+sm_trial |>
+  tbl_summary(
+    by = trt,
+    missing = "no"
+  ) |> 
+  add_overall() |> 
+  add_n()
+```
+
+-   `add_overall()`: adds a column of overall statistics
+-   `add_n()`: adds a column with the sample size
+
+## Update tbl_summary() with add\_\*()  {auto-animate="true"}
+
+```{r}
+#| label: 'summary-with-overall3'
+#| output-location: "column"
+#| code-line-numbers: "8,9,10"
+sm_trial |>
+  tbl_summary(
+    by = trt,
+    missing = "no"
+  ) |> 
+  add_overall() |> 
+  add_n() |> 
+  add_stat_label(
+    label = all_categorical() ~ "No. (%)"
+  ) 
+```
+
+-   `add_overall()`: adds a column of overall statistics
+-   `add_n()`: adds a column with the sample size
+-   `add_stat_label()`: adds a description of the reported statistic
+
+## Update with bold\_\*()/italicize\_\*()
+
+```{r}
+#| label: 'summary-bold'
+#| output-location: "column"
+#| code-line-numbers: "6,7,8"
+sm_trial |>
+  tbl_summary(
+    by = trt
+  ) |>
+  add_p() |> 
+  bold_labels() |> 
+  italicize_levels() |> 
+  bold_p(t = 0.8)
+```
+
+-   `bold_labels()`: bold the variable labels
+-   `italicize_levels()`: italicize the variable levels
+-   `bold_p()`: bold p-values according a specified threshold
+
+## Update tbl_summary() with modify\_\*()
+
+```{r}
+#| label: 'summary-modified'
+#| output-location: "column"
+#| code-line-numbers: "4,5,6,7,8,9,10,11,12,13"
+tbl <-
+  sm_trial |> 
+  tbl_summary(by = trt, 
+              missing = "no") |>
+  modify_header(
+      stat_1 ~ "**Group A**",
+      stat_2 ~ "**Group B**"
+  ) |> 
+  modify_spanning_header(
+    all_stat_cols() ~ "**Drug**") |> 
+  modify_footnote(
+    all_stat_cols() ~ 
+      paste("median (IQR) for continuous;",
+            "n (%) for categorical")
+  )
+tbl
+```
+
+-   Use `show_header_names()` to see the internal header names available for use in `modify_header()`
+
+## Column names
+
+```{r}
+#| label: 'column-names'
+#| output-location: "column"
+show_header_names(tbl)
+```
+
+<br><br>
+
+::: {.larger}
+`all_stat_cols()` selects columns `"stat_1"` and `"stat_2"`
+:::
+
+## Update tbl_summary() with add\_\*()
+
+```{r}
+#| label: 'summary-with-difference'
+#| code-line-numbers: "12"
+trial |>
+  select(trt, marker, response) |>
+  tbl_summary(
+    by = trt,
+    statistic = list(marker ~ "{mean} ({sd})",
+                     response ~ "{p}%"),
+    missing = "no"
+  ) |> 
+  add_difference()
+```
+
+-   `add_difference()`: mean and rate differences between two groups. Can also be adjusted differences
+
+## Update tbl_summary() with add\_\*()
+
+::: {.columns .v-center-container}
+::: {.column width="50%"}
+```{r}
+#| label: 'summary-with-custom-stat'
+#| eval: false
+#| code-line-numbers: "6"
+sm_trial |>
+  tbl_summary(
+    by = trt,
+    missing = "no"
+  ) |> 
+  add_stat(...)
+```
+:::
+
+::: {.column width="50%"}
+-   Customize statistics presented with `add_stat()`
+
+-   Added statistics can be placed on the label or the level rows
+
+-   Added statistics may be a single column or multiple
+:::
+:::
+
+## Where are the ARDs?
+
+::: {.columns .v-center-container}
+::: {.column width="30%"}
+
+- ARDs are the backbone for all calculations in gtsummary
+
+- Every gtsummary table saves the ARDs from each calculation
+
+- They can be extracted individually, or combined.
+
+:::
+
+::: {.column width="70%"}
+
+```{r}
+#| label: 'summary-view-ard'
+tbl <- tbl_summary(trial, by = trt) |> add_p()
+class(tbl$cards)
+names(tbl$cards)
+tbl$cards[["add_p"]][["age"]]
+```
+
+:::
+:::
+
+## Add-on functions in {gtsummary}
+
+And many more!
+
+See the documentation at <http://www.danieldsjoberg.com/gtsummary/reference/index.html>
+
+And a detailed `tbl_summary()` vignette at <http://www.danieldsjoberg.com/gtsummary/articles/tbl_summary.html>
+
+## {gtsummary} Exercise 1
+
+1. Navigate to Posit Cloud script `04-gtsummary_exercise1.R`.
+
+2. Create the table outlined in the script.
+
+3. Add the "completed" sticky note to your laptop when complete.
+
+```{r}
+#| echo: false
+#| cache: false
+countdown(minutes = 10)
+```
+
+## Cross-tabulation with tbl_cross()
+
+`tbl_cross()` is a wrapper for `tbl_summary()` for **n x m** tables
+
+```{r}
+#| label: 'tbl_cross'
+#| output-location: "column"
+sm_trial |>
+  tbl_cross(
+    row = trt, 
+    col = grade,
+    percent = "row",
+    margin = "row"
+  ) |>
+  add_p(source_note = TRUE) |>
+  bold_labels()
+```
+
+## Continuous Summaries with tbl_continuous()
+
+`tbl_continuous()` summarizes a continuous variable by 1, 2, or more categorical variables
+
+```{r}
+#| label: 'tbl_continuous'
+sm_trial |>
+  tbl_continuous(
+    variable = age,
+    by = trt,
+    include = grade
+  )
+```
+
+## Wide Summaries with tbl_wide_summary()
+
+`tbl_wide_summary()` summarizes a continuous variable with summary statistics spread across columns
+
+```{r}
+#| label: 'tbl_wide_summary'
+trial |>
+  tbl_wide_summary(include = c(response, grade))
+```
+
+## Wide Summaries with tbl_wide_summary()
+
+```{r}
+#| label: 'tbl_wide_summary2'
+trial |>
+  tbl_wide_summary(include = c(age, marker))
+```
+
+Naturally, you can change the statistics, and which appear in each column.
+ 
