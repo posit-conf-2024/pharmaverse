@@ -1,8 +1,10 @@
 
-## How it started
+##
 
 ::: {.columns}
 ::: {.column width="60%"}
+
+### How it started
 
 ::: small
 
@@ -11,6 +13,16 @@
 - Goal was to build a package to summarize study results with code that was [both simple and customizable]{.emphasis}
 
 - First release in May 2019
+
+:::
+
+::: {.fragment}
+
+### How it's going
+
+::: small
+
+- The stats
 
   - [1,000,000+ installations]{.emphasis} from CRAN
   - 1000+ GitHub stars
@@ -22,14 +34,18 @@
 - Won the 2024 Posit Pharma Table Contest
 
 :::
+:::
 
 :::
 ::: {.column width="40%"}
 
 <img src="images/gtsummary-logo.png" width="650"/>
 
+::: {.fragment}
+
 <img src="images/asa.png" width="200"/><img src="images/posit.png" width="200"/>
 
+:::
 :::
 :::
 
