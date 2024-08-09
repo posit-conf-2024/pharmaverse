@@ -83,7 +83,6 @@ tfrmt_demog <- tfrmt(
         sd = frmt("")    # a1) complete `frmt` so values are rounded to 2 dec places
       )
     ),
-    ,
     frmt_structure(
       group_val = ".default", label_val = ".default",
       frmt_combine(
