@@ -25,7 +25,7 @@
     "href": "slides-gtsummary/index.html#how-it-started",
     "title": "Pharmaverse Phlavors: gtsummary + ARD",
     "section": "How it started",
-    "text": "How it started\n\n\n\nBegan to address reproducible issues in research while I was working in academia\nGoal was to build a package to summarize study results with code that was both simple and customizable\nFirst release in May 2019\n\n1,000,000+ installations from CRAN\n1000+ GitHub stars\n300+ contributors\n~50 code contributors"
+    "text": "How it started\n\n\n\n\nBegan to address reproducible issues while working in academia\nGoal was to build a package to summarize study results with code that was both simple and customizable\nFirst release in May 2019\n\n1,000,000+ installations from CRAN\n1000+ GitHub stars\n300+ contributors\n~50 code contributors\n\nWon the 2021 American Statistical Association (ASA) Innovation in Programming Award\nWon the 2024 Posit Pharma Table Contest"
   },
   {
     "objectID": "slides-gtsummary/index.html#gtsummary-overview",
@@ -443,7 +443,7 @@
     "href": "index.html#schedule",
     "title": "Flavors of the pharmaverse",
     "section": "Schedule",
-    "text": "Schedule\n\n\n\n\n\n\n\n\n\n\n\n\nTime\nActivity\n\n\n\n\n09:00 - 10:30\nWelcome  {admiral} and {xportr}\n\n\n10:30 - 11:00\nCoffee Break\n\n\n11:00 - 12:00\nIntroduction to tables  Analysis Result Datasets\n\n\n12:00 - 13:30\nLunch\n\n\n13:30 - 15:00\n{tfrmt}  {gtsummary}\n\n\n15:00 - 15:30\nCoffee Break\n\n\n15:30 - 17:00\nRecap, Discussion, and Read Out",
+    "text": "Schedule\n\n\n\n\n\n\n\n\n\n\n\n\nTime\nActivity\n\n\n\n\n09:00 - 10:30\nWelcome  {admiral} and {xportr}\n\n\n10:30 - 11:00\nCoffee Break\n\n\n11:00 - 12:00\nIntroduction to tables  Analysis Result Datasets\n\n\n12:00 - 13:30\nLunch\n\n\n13:30 - 15:00\n{tfrmt}  Create Tables with {gtsummary}\n\n\n15:00 - 15:30\nCoffee Break\n\n\n15:30 - 17:00\nRecap, Discussion, and Read Out",
     "crumbs": [
       "Home"
     ]
