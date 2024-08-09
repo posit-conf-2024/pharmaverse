@@ -18,6 +18,7 @@ ard_ae <- readRDS("materials/3-Tables/data/tfrmt_ard_ae.rds")
 #  - adjust the label for ANY AE so matches the SOC value (expectation of all top-level summary rows)
 #  - scale percentages
 #  - filter to just the needed stats (no SOC/PT level denominators)
+#  - add order columns
 ard_ae <- ard_ae |>
   mutate(group3 = ifelse(variable=="any_ae", "AESOC", group3),
                 group3_level = ifelse(variable=="any_ae", "ANY ADVERSE EVENT", group3_level))|>
@@ -25,7 +26,10 @@ ard_ae <- ard_ae |>
   mutate(label = ifelse(variable=="any_ae", "ANY ADVERSE EVENT", label),
          stat_name = ifelse(variable=="TRT01A" & stat_name=="n", "bigN", stat_name),
          stat = ifelse(stat_name=="p", stat*100, stat)) |>
-  filter(!(variable!="TRT01A" & stat_name=="N"))
+  filter(!(variable!="TRT01A" & stat_name=="N")) |>
+  mutate(ord1 = ifelse(variable=="any_ae", 1, ifelse(variable=="AESOC", 2, 3)),
+         ord2 = as.numeric(as.factor(AESOC)),
+         ord3 = as.numeric(as.factor(label)))
 # Setup ends -------------------------------------------------------------------
 
 
@@ -47,6 +51,7 @@ tfrmt_n_pct(n = ,
         param = ,
         value = ,
         column = ,
+        sorting_cols = ,
         col_plan = col_plan(
 
         ),
