@@ -348,6 +348,11 @@
       ],
       "Hash": "46b7ae0faa009c0124a7415e86d0185f"
     },
+    "cardx": {
+      "Package": "cardx",
+      "Version": "0.2.0",
+      "Source": "Repository"
+    },
     "cellranger": {
       "Package": "cellranger",
       "Version": "1.1.0",
