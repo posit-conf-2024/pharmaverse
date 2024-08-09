@@ -1,5 +1,424 @@
 [
   {
+    "objectID": "slides-gtsummary/index.html#acknowledgements",
+    "href": "slides-gtsummary/index.html#acknowledgements",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "Acknowledgements",
+    "text": "Acknowledgements\n\n\n\n\nThis work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA4.0)."
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#daniel-d.-sjoberg",
+    "href": "slides-gtsummary/index.html#daniel-d.-sjoberg",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "Daniel D. Sjoberg",
+    "text": "Daniel D. Sjoberg\n\n\n danieldsjoberg.com\n mastodon.social/@ddsjoberg\n linkedin.com/in/ddsjoberg\n github.com/ddsjoberg"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#questions",
+    "href": "slides-gtsummary/index.html#questions",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "Questions",
+    "text": "Questions\n\n\n Please ask questions at any time!"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#how-it-started",
+    "href": "slides-gtsummary/index.html#how-it-started",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "How it started",
+    "text": "How it started\n\n\n\nBegan to address reproducible issues in research while I was working in academia\nGoal was to build a package to summarize study results with code that was both simple and customizable\nFirst release in May 2019\n\n1,000,000+ installations from CRAN\n1000+ GitHub stars\n300+ contributors\n~50 code contributors"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#gtsummary-overview",
+    "href": "slides-gtsummary/index.html#gtsummary-overview",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "{gtsummary} overview",
+    "text": "{gtsummary} overview\n\n\n\nCreate tabular summaries with sensible defaults but highly customizable\nTypes of summaries:\n\nDemographic- or “Table 1”-types\nCross-tabulation\nRegression models\nSurvival data\nSurvey data\nCustom tables\n\n\n\n\nReport statistics from {gtsummary} tables inline in R Markdown\nStack and/or merge any table type\nUse themes to standardize across tables\nChoose from different print engines"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#gtsummary-overview-1",
+    "href": "slides-gtsummary/index.html#gtsummary-overview-1",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "{gtsummary} overview",
+    "text": "{gtsummary} overview\nFor our workshop, we will focus on the following summary types as well as themes and print engines.\n\ntbl_summary()\ntbl_cross()\ntbl_continuous()\ntbl_wide_summary()"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#example-dataset",
+    "href": "slides-gtsummary/index.html#example-dataset",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "Example Dataset",
+    "text": "Example Dataset\n\n\n\nThe trial data set is included with {gtsummary}\nSimulated data set of baseline characteristics for 200 patients who receive Drug A or Drug B\nVariables were assigned labels using the labelled package\n\n\n\nlibrary(gtsummary)\nlibrary(tidyverse)\nhead(trial) |&gt; gt::gt()\n\n\n\n\n\n\n\nChemotherapy Treatment\nAge\nMarker Level (ng/mL)\nT Stage\nGrade\nTumor Response\nPatient Died\nMonths to Death/Censor\n\n\n\n\nDrug A\n23\n0.160\nT1\nII\n0\n0\n24.00\n\n\nDrug B\n9\n1.107\nT2\nI\n1\n0\n24.00\n\n\nDrug A\n31\n0.277\nT1\nII\n0\n0\n24.00\n\n\nDrug A\nNA\n2.067\nT3\nIII\n1\n1\n17.64\n\n\nDrug A\n51\n2.767\nT4\nIII\n1\n1\n16.43\n\n\nDrug B\n39\n0.613\nT4\nI\n0\n1\n15.64"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#example-dataset-1",
+    "href": "slides-gtsummary/index.html#example-dataset-1",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "Example Dataset",
+    "text": "Example Dataset\n\n\nThis presentation will use a subset of the variables.\n\nsm_trial &lt;-\n  trial |&gt; \n  select(trt, age, grade, response)\n\n\n\n\n\n\n\n\n\n\nVariable\nLabel\n\n\n\n\ntrt\nChemotherapy Treatment\n\n\nage\nAge\n\n\ngrade\nGrade\n\n\nresponse\nTumor Response"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#basic-tbl_summary",
+    "href": "slides-gtsummary/index.html#basic-tbl_summary",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "Basic tbl_summary()",
+    "text": "Basic tbl_summary()\n\n\n\nsm_trial |&gt; \n  select(-trt) |&gt;  \n  tbl_summary()\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nN = 2001\n\n\n\n\nAge\n47 (38, 57)\n\n\n    Unknown\n11\n\n\nGrade\n\n\n\n\n    I\n68 (34%)\n\n\n    II\n68 (34%)\n\n\n    III\n64 (32%)\n\n\nTumor Response\n61 (32%)\n\n\n    Unknown\n7\n\n\n\n1 Median (Q1, Q3); n (%)\n\n\n\n\n\n\n\n\n\n\nFour types of summaries: continuous, continuous2, categorical, and dichotomous\nStatistics are median (IQR) for continuous, n (%) for categorical/dichotomous\nVariables coded 0/1, TRUE/FALSE, Yes/No treated as dichotomous\nLists NA values under “Unknown”\nLabel attributes are printed automatically"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#customize-tbl_summary-output",
+    "href": "slides-gtsummary/index.html#customize-tbl_summary-output",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "Customize tbl_summary() output",
+    "text": "Customize tbl_summary() output\n\n\ntbl_summary(\n  sm_trial,\n  by = trt,\n)\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nDrug A\nN = 981\nDrug B\nN = 1021\n\n\n\n\nAge\n46 (37, 60)\n48 (39, 56)\n\n\n    Unknown\n7\n4\n\n\nGrade\n\n\n\n\n\n\n    I\n35 (36%)\n33 (32%)\n\n\n    II\n32 (33%)\n36 (35%)\n\n\n    III\n31 (32%)\n33 (32%)\n\n\nTumor Response\n28 (29%)\n33 (34%)\n\n\n    Unknown\n3\n4\n\n\n\n1 Median (Q1, Q3); n (%)\n\n\n\n\n\n\n\n\n\n\n\n\nby: specify a column variable for cross-tabulation"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#customize-tbl_summary-output-1",
+    "href": "slides-gtsummary/index.html#customize-tbl_summary-output-1",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "Customize tbl_summary() output",
+    "text": "Customize tbl_summary() output\n\n\ntbl_summary(\n  sm_trial,\n  by = trt,\n  type = age ~ \"continuous2\",\n)\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nDrug A\nN = 981\nDrug B\nN = 1021\n\n\n\n\nAge\n\n\n\n\n\n\n    Median (Q1, Q3)\n46 (37, 60)\n48 (39, 56)\n\n\n    Unknown\n7\n4\n\n\nGrade\n\n\n\n\n\n\n    I\n35 (36%)\n33 (32%)\n\n\n    II\n32 (33%)\n36 (35%)\n\n\n    III\n31 (32%)\n33 (32%)\n\n\nTumor Response\n28 (29%)\n33 (34%)\n\n\n    Unknown\n3\n4\n\n\n\n1 n (%)\n\n\n\n\n\n\n\n\n\n\n\n\nby: specify a column variable for cross-tabulation\ntype: specify the summary type"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#customize-tbl_summary-output-2",
+    "href": "slides-gtsummary/index.html#customize-tbl_summary-output-2",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "Customize tbl_summary() output",
+    "text": "Customize tbl_summary() output\n\n\ntbl_summary(\n  sm_trial,\n  by = trt,\n  type = age ~ \"continuous2\",\n  statistic = \n    list(\n      age ~ c(\"{mean} ({sd})\", \n              \"{min}, {max}\"), \n      response ~ \"{n} / {N} ({p}%)\"\n    ),\n)\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nDrug A\nN = 981\nDrug B\nN = 1021\n\n\n\n\nAge\n\n\n\n\n\n\n    Mean (SD)\n47 (15)\n47 (14)\n\n\n    Min, Max\n6, 78\n9, 83\n\n\n    Unknown\n7\n4\n\n\nGrade\n\n\n\n\n\n\n    I\n35 (36%)\n33 (32%)\n\n\n    II\n32 (33%)\n36 (35%)\n\n\n    III\n31 (32%)\n33 (32%)\n\n\nTumor Response\n28 / 95 (29%)\n33 / 98 (34%)\n\n\n    Unknown\n3\n4\n\n\n\n1 n (%); n / N (%)\n\n\n\n\n\n\n\n\n\n\n\n\nby: specify a column variable for cross-tabulation\ntype: specify the summary type\nstatistic: customize the reported statistics"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#customize-tbl_summary-output-3",
+    "href": "slides-gtsummary/index.html#customize-tbl_summary-output-3",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "Customize tbl_summary() output",
+    "text": "Customize tbl_summary() output\n\n\ntbl_summary(\n  sm_trial,\n  by = trt,\n  type = age ~ \"continuous2\",\n  statistic = \n    list(\n      age ~ c(\"{mean} ({sd})\", \n              \"{min}, {max}\"), \n      response ~ \"{n} / {N} ({p}%)\"\n    ),\n  label = \n    grade ~ \"Pathologic tumor grade\",\n)\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nDrug A\nN = 981\nDrug B\nN = 1021\n\n\n\n\nAge\n\n\n\n\n\n\n    Mean (SD)\n47 (15)\n47 (14)\n\n\n    Min, Max\n6, 78\n9, 83\n\n\n    Unknown\n7\n4\n\n\nPathologic tumor grade\n\n\n\n\n\n\n    I\n35 (36%)\n33 (32%)\n\n\n    II\n32 (33%)\n36 (35%)\n\n\n    III\n31 (32%)\n33 (32%)\n\n\nTumor Response\n28 / 95 (29%)\n33 / 98 (34%)\n\n\n    Unknown\n3\n4\n\n\n\n1 n (%); n / N (%)\n\n\n\n\n\n\n\n\n\n\n\n\nby: specify a column variable for cross-tabulation\ntype: specify the summary type\nstatistic: customize the reported statistics\n\n\n\nlabel: change or customize variable labels"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#customize-tbl_summary-output-4",
+    "href": "slides-gtsummary/index.html#customize-tbl_summary-output-4",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "Customize tbl_summary() output",
+    "text": "Customize tbl_summary() output\n\n\ntbl_summary(\n  sm_trial,\n  by = trt,\n  type = age ~ \"continuous2\",\n  statistic = \n    list(\n      age ~ c(\"{mean} ({sd})\", \n              \"{min}, {max}\"), \n      response ~ \"{n} / {N} ({p}%)\"\n    ),\n  label = \n    grade ~ \"Pathologic tumor grade\",\n  digits = age ~ list(sd = 1) # report SD(age) to one decimal place\n)\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nDrug A\nN = 981\nDrug B\nN = 1021\n\n\n\n\nAge\n\n\n\n\n\n\n    Mean (SD)\n47 (14.7)\n47 (14.0)\n\n\n    Min, Max\n6, 78\n9, 83\n\n\n    Unknown\n7\n4\n\n\nPathologic tumor grade\n\n\n\n\n\n\n    I\n35 (36%)\n33 (32%)\n\n\n    II\n32 (33%)\n36 (35%)\n\n\n    III\n31 (32%)\n33 (32%)\n\n\nTumor Response\n28 / 95 (29%)\n33 / 98 (34%)\n\n\n    Unknown\n3\n4\n\n\n\n1 n (%); n / N (%)\n\n\n\n\n\n\n\n\n\n\n\n\nby: specify a column variable for cross-tabulation\ntype: specify the summary type\nstatistic: customize the reported statistics\n\n\n\nlabel: change or customize variable labels\ndigits: specify the number of decimal places for rounding"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#gtsummary-formulas",
+    "href": "slides-gtsummary/index.html#gtsummary-formulas",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "{gtsummary} + formulas",
+    "text": "{gtsummary} + formulas\nThis syntax is also used in {cards}, {cardx}, and {gt}.\n\n\n\nNamed list are OK too! label = list(age = \"Patient Age\")"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#section",
+    "href": "slides-gtsummary/index.html#section",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "",
+    "text": "{gtsummary} selectors\n\nUse the following helpers to select groups of variables: all_continuous(), all_categorical()\nUse all_stat_cols() to select the summary statistic columns\n\nAdd-on functions in {gtsummary}\ntbl_summary() objects can also be updated using related functions.\n\nadd_*() add additional column of statistics or information, e.g. p-values, q-values, overall statistics, treatment differences, N obs., and more\nmodify_*() modify table headers, spanning headers, footnotes, and more\nbold_*()/italicize_*() style labels, variable levels, significant p-values"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#update-tbl_summary-with-add_",
+    "href": "slides-gtsummary/index.html#update-tbl_summary-with-add_",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "Update tbl_summary() with add_*()",
+    "text": "Update tbl_summary() with add_*()\n\n\nsm_trial |&gt;\n  tbl_summary(\n    by = trt\n  ) |&gt; \n  add_p() |&gt; \n  add_q(method = \"fdr\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nDrug A\nN = 981\nDrug B\nN = 1021\np-value\nq-value2\n\n\n\n\nAge\n46 (37, 60)\n48 (39, 56)\n\n\n\n\n\n\n    Unknown\n7\n4\n\n\n\n\n\n\nGrade\n\n\n\n\n\n\n\n\n\n\n    I\n35 (36%)\n33 (32%)\n\n\n\n\n\n\n    II\n32 (33%)\n36 (35%)\n\n\n\n\n\n\n    III\n31 (32%)\n33 (32%)\n\n\n\n\n\n\nTumor Response\n28 (29%)\n33 (34%)\n\n\n\n\n\n\n    Unknown\n3\n4\n\n\n\n\n\n\n\n1 Median (Q1, Q3); n (%)\n\n\n2 False discovery rate correction for multiple testing\n\n\n\n\n\n\n\n\n\nadd_p(): adds a column of p-values\nadd_q(): adds a column of p-values adjusted for multiple comparisons through a call to p.adjust()"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#update-tbl_summary-with-add_-1",
+    "href": "slides-gtsummary/index.html#update-tbl_summary-with-add_-1",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "Update tbl_summary() with add_*()",
+    "text": "Update tbl_summary() with add_*()\n\n\nsm_trial |&gt;\n  tbl_summary(\n    by = trt,\n    missing = \"no\"\n  ) |&gt; \n  add_overall()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nOverall\nN = 2001\nDrug A\nN = 981\nDrug B\nN = 1021\n\n\n\n\nAge\n47 (38, 57)\n46 (37, 60)\n48 (39, 56)\n\n\nGrade\n\n\n\n\n\n\n\n\n    I\n68 (34%)\n35 (36%)\n33 (32%)\n\n\n    II\n68 (34%)\n32 (33%)\n36 (35%)\n\n\n    III\n64 (32%)\n31 (32%)\n33 (32%)\n\n\nTumor Response\n61 (32%)\n28 (29%)\n33 (34%)\n\n\n\n1 Median (Q1, Q3); n (%)\n\n\n\n\n\n\n\n\n\nadd_overall(): adds a column of overall statistics"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#update-tbl_summary-with-add_-2",
+    "href": "slides-gtsummary/index.html#update-tbl_summary-with-add_-2",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "Update tbl_summary() with add_*()",
+    "text": "Update tbl_summary() with add_*()\n\n\nsm_trial |&gt;\n  tbl_summary(\n    by = trt,\n    missing = \"no\"\n  ) |&gt; \n  add_overall() |&gt; \n  add_n()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nN\nOverall\nN = 2001\nDrug A\nN = 981\nDrug B\nN = 1021\n\n\n\n\nAge\n189\n47 (38, 57)\n46 (37, 60)\n48 (39, 56)\n\n\nGrade\n200\n\n\n\n\n\n\n\n\n    I\n\n\n68 (34%)\n35 (36%)\n33 (32%)\n\n\n    II\n\n\n68 (34%)\n32 (33%)\n36 (35%)\n\n\n    III\n\n\n64 (32%)\n31 (32%)\n33 (32%)\n\n\nTumor Response\n193\n61 (32%)\n28 (29%)\n33 (34%)\n\n\n\n1 Median (Q1, Q3); n (%)\n\n\n\n\n\n\n\n\n\nadd_overall(): adds a column of overall statistics\nadd_n(): adds a column with the sample size"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#update-tbl_summary-with-add_-3",
+    "href": "slides-gtsummary/index.html#update-tbl_summary-with-add_-3",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "Update tbl_summary() with add_*()",
+    "text": "Update tbl_summary() with add_*()\n\n\nsm_trial |&gt;\n  tbl_summary(\n    by = trt,\n    missing = \"no\"\n  ) |&gt; \n  add_overall() |&gt; \n  add_n() |&gt; \n  add_stat_label(\n    label = all_categorical() ~ \"No. (%)\"\n  ) \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nN\nOverall\nN = 200\nDrug A\nN = 98\nDrug B\nN = 102\n\n\n\n\nAge, Median (Q1, Q3)\n189\n47 (38, 57)\n46 (37, 60)\n48 (39, 56)\n\n\nGrade, No. (%)\n200\n\n\n\n\n\n\n\n\n    I\n\n\n68 (34%)\n35 (36%)\n33 (32%)\n\n\n    II\n\n\n68 (34%)\n32 (33%)\n36 (35%)\n\n\n    III\n\n\n64 (32%)\n31 (32%)\n33 (32%)\n\n\nTumor Response, No. (%)\n193\n61 (32%)\n28 (29%)\n33 (34%)\n\n\n\n\n\n\n\n\nadd_overall(): adds a column of overall statistics\nadd_n(): adds a column with the sample size\nadd_stat_label(): adds a description of the reported statistic"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#update-with-bold_italicize_",
+    "href": "slides-gtsummary/index.html#update-with-bold_italicize_",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "Update with bold_*()/italicize_*()",
+    "text": "Update with bold_*()/italicize_*()\n\n\nsm_trial |&gt;\n  tbl_summary(\n    by = trt\n  ) |&gt;\n  add_p() |&gt; \n  bold_labels() |&gt; \n  italicize_levels() |&gt; \n  bold_p(t = 0.8)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nDrug A\nN = 981\nDrug B\nN = 1021\np-value\n\n\n\n\nAge\n46 (37, 60)\n48 (39, 56)\n\n\n\n\n    Unknown\n7\n4\n\n\n\n\nGrade\n\n\n\n\n\n\n\n\n    I\n35 (36%)\n33 (32%)\n\n\n\n\n    II\n32 (33%)\n36 (35%)\n\n\n\n\n    III\n31 (32%)\n33 (32%)\n\n\n\n\nTumor Response\n28 (29%)\n33 (34%)\n\n\n\n\n    Unknown\n3\n4\n\n\n\n\n\n1 Median (Q1, Q3); n (%)\n\n\n\n\n\n\n\n\n\nbold_labels(): bold the variable labels\nitalicize_levels(): italicize the variable levels\nbold_p(): bold p-values according a specified threshold"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#update-tbl_summary-with-modify_",
+    "href": "slides-gtsummary/index.html#update-tbl_summary-with-modify_",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "Update tbl_summary() with modify_*()",
+    "text": "Update tbl_summary() with modify_*()\n\n\ntbl &lt;-\n  sm_trial |&gt; \n  tbl_summary(by = trt, \n              missing = \"no\") |&gt;\n  modify_header(\n      stat_1 ~ \"**Group A**\",\n      stat_2 ~ \"**Group B**\"\n  ) |&gt; \n  modify_spanning_header(\n    all_stat_cols() ~ \"**Drug**\") |&gt; \n  modify_footnote(\n    all_stat_cols() ~ \n      paste(\"median (IQR) for continuous;\",\n            \"n (%) for categorical\")\n  )\ntbl\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nDrug\n\n\nGroup A1\nGroup B1\n\n\n\n\nAge\n46 (37, 60)\n48 (39, 56)\n\n\nGrade\n\n\n\n\n\n\n    I\n35 (36%)\n33 (32%)\n\n\n    II\n32 (33%)\n36 (35%)\n\n\n    III\n31 (32%)\n33 (32%)\n\n\nTumor Response\n28 (29%)\n33 (34%)\n\n\n\n1 median (IQR) for continuous; n (%) for categorical\n\n\n\n\n\n\n\n\n\nUse show_header_names() to see the internal header names available for use in modify_header()"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#column-names",
+    "href": "slides-gtsummary/index.html#column-names",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "Column names",
+    "text": "Column names\n\n\nshow_header_names(tbl)\n\n\n\n\n\nColumn Name   Column Header      \n------------  -------------------\nlabel         **Characteristic** \nstat_1        **Group A**        \nstat_2        **Group B**        \n\n\n\n\nall_stat_cols() selects columns \"stat_1\" and \"stat_2\""
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#update-tbl_summary-with-add_-4",
+    "href": "slides-gtsummary/index.html#update-tbl_summary-with-add_-4",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "Update tbl_summary() with add_*()",
+    "text": "Update tbl_summary() with add_*()\n\ntrial |&gt;\n  select(trt, marker, response) |&gt;\n  tbl_summary(\n    by = trt,\n    statistic = list(marker ~ \"{mean} ({sd})\",\n                     response ~ \"{p}%\"),\n    missing = \"no\"\n  ) |&gt; \n  add_difference()\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nDrug A\nN = 981\nDrug B\nN = 1021\nDifference\n\n\n\n\nMarker Level (ng/mL)\n1.02 (0.89)\n0.82 (0.83)\n\n\n\n\nTumor Response\n29%\n34%\n\n\n\n\n\n1 Mean (SD); %\n\n\n\n\n\n\n\n\n\nadd_difference(): mean and rate differences between two groups. Can also be adjusted differences"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#update-tbl_summary-with-add_-5",
+    "href": "slides-gtsummary/index.html#update-tbl_summary-with-add_-5",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "Update tbl_summary() with add_*()",
+    "text": "Update tbl_summary() with add_*()\n\n\n\nsm_trial |&gt;\n  tbl_summary(\n    by = trt,\n    missing = \"no\"\n  ) |&gt; \n  add_stat(...)\n\n\n\nCustomize statistics presented with add_stat()\nAdded statistics can be placed on the label or the level rows\nAdded statistics may be a single column or multiple"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#where-are-the-ards",
+    "href": "slides-gtsummary/index.html#where-are-the-ards",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "Where are the ARDs?",
+    "text": "Where are the ARDs?\n\n\n\nARDs are the backbone for all calculations in gtsummary\nEvery gtsummary table saves the ARDs from each calculation\nThey can be extracted individually, or combined.\n\n\n\ntbl &lt;- tbl_summary(trial, by = trt) |&gt; add_p()\nclass(tbl$cards)\n\n[1] \"list\"\n\nnames(tbl$cards)\n\n[1] \"tbl_summary\" \"add_p\"      \n\ntbl$cards[[\"add_p\"]][[\"age\"]]\n\n  group1 variable stat_name stat warning     error\n1    trt      age   p.value              The pack…"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#add-on-functions-in-gtsummary-1",
+    "href": "slides-gtsummary/index.html#add-on-functions-in-gtsummary-1",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "Add-on functions in {gtsummary}",
+    "text": "Add-on functions in {gtsummary}\nAnd many more!\nSee the documentation at http://www.danieldsjoberg.com/gtsummary/reference/index.html\nAnd a detailed tbl_summary() vignette at http://www.danieldsjoberg.com/gtsummary/articles/tbl_summary.html"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#gtsummary-exercise-1",
+    "href": "slides-gtsummary/index.html#gtsummary-exercise-1",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "{gtsummary} Exercise 1",
+    "text": "{gtsummary} Exercise 1\n\nNavigate to Posit Cloud script 04-gtsummary_exercise1.R.\nCreate the table outlined in the script.\nAdd the “completed” sticky note to your laptop when complete.\n\n\n\n\n−+\n10:00"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#cross-tabulation-with-tbl_cross",
+    "href": "slides-gtsummary/index.html#cross-tabulation-with-tbl_cross",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "Cross-tabulation with tbl_cross()",
+    "text": "Cross-tabulation with tbl_cross()\ntbl_cross() is a wrapper for tbl_summary() for n x m tables\n\n\nsm_trial |&gt;\n  tbl_cross(\n    row = trt, \n    col = grade,\n    percent = \"row\",\n    margin = \"row\"\n  ) |&gt;\n  add_p(source_note = TRUE) |&gt;\n  bold_labels()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nGrade\n\n\nI\nII\nIII\n\n\n\n\nChemotherapy Treatment\n\n\n\n\n\n\n\n\n    Drug A\n35 (36%)\n32 (33%)\n31 (32%)\n\n\n    Drug B\n33 (32%)\n36 (35%)\n33 (32%)\n\n\nTotal\n68 (34%)\n68 (34%)\n64 (32%)"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#continuous-summaries-with-tbl_continuous",
+    "href": "slides-gtsummary/index.html#continuous-summaries-with-tbl_continuous",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "Continuous Summaries with tbl_continuous()",
+    "text": "Continuous Summaries with tbl_continuous()\ntbl_continuous() summarizes a continuous variable by 1, 2, or more categorical variables\n\nsm_trial |&gt;\n  tbl_continuous(\n    variable = age,\n    by = trt,\n    include = grade\n  )\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nDrug A\nN = 981\nDrug B\nN = 1021\n\n\n\n\nGrade\n\n\n\n\n\n\n    I\n46 (36, 60)\n48 (42, 55)\n\n\n    II\n45 (31, 55)\n51 (42, 58)\n\n\n    III\n52 (42, 61)\n45 (36, 52)\n\n\n\n1 Age: Median (Q1, Q3)"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#wide-summaries-with-tbl_wide_summary",
+    "href": "slides-gtsummary/index.html#wide-summaries-with-tbl_wide_summary",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "Wide Summaries with tbl_wide_summary()",
+    "text": "Wide Summaries with tbl_wide_summary()\ntbl_wide_summary() summarizes a continuous variable with summary statistics spread across columns\n\ntrial |&gt;\n  tbl_wide_summary(include = c(response, grade))\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nn\n%\n\n\n\n\nTumor Response\n61\n32%\n\n\nGrade\n\n\n\n\n\n\n    I\n68\n34%\n\n\n    II\n68\n34%\n\n\n    III\n64\n32%"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#wide-summaries-with-tbl_wide_summary-1",
+    "href": "slides-gtsummary/index.html#wide-summaries-with-tbl_wide_summary-1",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "Wide Summaries with tbl_wide_summary()",
+    "text": "Wide Summaries with tbl_wide_summary()\n\ntrial |&gt;\n  tbl_wide_summary(include = c(age, marker))\n\n\n\n\n\n\n\nCharacteristic\nMedian\nQ1, Q3\n\n\n\n\nAge\n47\n38, 57\n\n\nMarker Level (ng/mL)\n0.64\n0.22, 1.41\n\n\n\n\n\n\n\nNaturally, you can change the statistics, and which appear in each column."
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#tbl_merge-for-side-by-side-tables",
+    "href": "slides-gtsummary/index.html#tbl_merge-for-side-by-side-tables",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "tbl_merge() for side-by-side tables",
+    "text": "tbl_merge() for side-by-side tables\n\ntbl_n &lt;- \n  tbl_summary(trial, include = grade, statistic = grade ~ \"{n}\") |&gt; \n  modify_header(all_stat_cols() ~ \"**N**\") |&gt; # update column header\n  modify_footnote(all_stat_cols() ~ NA) # remove footnote\ntbl_age &lt;-\n  tbl_continuous(trial, include = grade, variable = age, by = trt) |&gt; \n  modify_header(all_stat_cols() ~ \"**{level}**\") # update header\n\n# combine the tables side by side\nlist(tbl_n, tbl_age) |&gt; \n  tbl_merge(tab_spanner = FALSE) # suppress default header\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nN\nDrug A1\nDrug B1\n\n\n\n\nGrade\n\n\n\n\n\n\n\n\n    I\n68\n46 (36, 60)\n48 (42, 55)\n\n\n    II\n68\n45 (31, 55)\n51 (42, 58)\n\n\n    III\n64\n52 (42, 61)\n45 (36, 52)\n\n\n\n1 Age: Median (Q1, Q3)"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#tbl_stack-to-combine-vertically",
+    "href": "slides-gtsummary/index.html#tbl_stack-to-combine-vertically",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "tbl_stack() to combine vertically",
+    "text": "tbl_stack() to combine vertically\n\ntbl_drug_a &lt;- trial |&gt; \n  dplyr::filter(trt == \"Drug A\") |&gt; \n  tbl_summary(include = c(response, death), missing = \"no\")\ntbl_drug_b &lt;- trial |&gt; \n  dplyr::filter(trt == \"Drug B\") |&gt; \n  tbl_summary(include = c(response, death), missing = \"no\")\n\n# stack the two tables \nlist(tbl_drug_a, tbl_drug_b) |&gt; \n  tbl_stack(group_header = c(\"Drug A\", \"Drug B\")) |&gt; # optionally include headers for each table\n  modify_header(all_stat_cols() ~ \"**Outcome Rates**\")\n\n\n\n\n\n\n\nCharacteristic\nOutcome Rates1\n\n\n\n\nDrug A\n\n\nTumor Response\n28 (29%)\n\n\nPatient Died\n52 (53%)\n\n\nDrug B\n\n\nTumor Response\n33 (34%)\n\n\nPatient Died\n60 (59%)\n\n\n\n1 n (%)"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#tbl_strata-for-stratified-tables",
+    "href": "slides-gtsummary/index.html#tbl_strata-for-stratified-tables",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "tbl_strata() for stratified tables",
+    "text": "tbl_strata() for stratified tables\n\ntbl_strata(\n  trial, \n  strata = trt, \n  ~ .x |&gt; \n    tbl_wide_summary(include = c(response, death))\n)\n\n\n\n\n\n\n\nCharacteristic\nDrug A\nDrug B\n\n\nn\n%\nn\n%\n\n\n\n\nTumor Response\n28\n29%\n33\n34%\n\n\nPatient Died\n52\n53%\n60\n59%\n\n\n\n\n\n\n\nThe default is to combine stratified tables with tbl_merge()."
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#tbl_strata-for-stratified-tables-1",
+    "href": "slides-gtsummary/index.html#tbl_strata-for-stratified-tables-1",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "tbl_strata() for stratified tables",
+    "text": "tbl_strata() for stratified tables\nWe can also stack the tables.\n\ntbl_strata(\n  trial, \n  strata = trt, \n  ~ .x |&gt; \n    tbl_wide_summary(include = c(response, death)),\n  .combine_with = \"tbl_stack\"\n)\n\n\n\n\n\n\n\nCharacteristic\nn\n%\n\n\n\n\nDrug A\n\n\nTumor Response\n28\n29%\n\n\nPatient Died\n52\n53%\n\n\nDrug B\n\n\nTumor Response\n33\n34%\n\n\nPatient Died\n60\n59%"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#define-custom-function-tbl_cmh",
+    "href": "slides-gtsummary/index.html#define-custom-function-tbl_cmh",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "Define custom function tbl_cmh()",
+    "text": "Define custom function tbl_cmh()"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#define-custom-function-tbl_cmh-1",
+    "href": "slides-gtsummary/index.html#define-custom-function-tbl_cmh-1",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "Define custom function tbl_cmh()",
+    "text": "Define custom function tbl_cmh()"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#cobbling-tables-together",
+    "href": "slides-gtsummary/index.html#cobbling-tables-together",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "Cobbling Tables Together",
+    "text": "Cobbling Tables Together\n\n\nMost of the tables we create in the pharma space come from a catalog of standard tables.\nCustom or one-off tables are often quite difficult and time intensive to create.\nThe {gtsummary} package makes it simple to break complex tables into their simple parts and cobble them together in the end.\nMoreover, the internal structure of a gtsummary table is super simple: a data frame and instructions on how to print that data frame to make it cute. If needed, you can directly modify the underlying data frame with modify_table_body().\n\n\n\ntrial |&gt; tbl_summary(include = c(age, grade), by = trt) |&gt; purrr::pluck(\"table_body\")\n\n# A tibble: 6 × 7\n  variable var_type    row_type var_label label   stat_1      stat_2     \n  &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;      \n1 age      continuous  label    Age       Age     46 (37, 60) 48 (39, 56)\n2 age      continuous  missing  Age       Unknown 7           4          \n3 grade    categorical label    Grade     Grade   &lt;NA&gt;        &lt;NA&gt;       \n4 grade    categorical level    Grade     I       35 (36%)    33 (32%)   \n5 grade    categorical level    Grade     II      32 (33%)    36 (35%)   \n6 grade    categorical level    Grade     III     31 (32%)    33 (32%)"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#ard-first-tables-1",
+    "href": "slides-gtsummary/index.html#ard-first-tables-1",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "ARD-first Tables",
+    "text": "ARD-first Tables\nSimilar to functions that accept a data frame, the package exports functions with nearly identical APIs that accept an ARD.\n\n\ntbl_summary()\n\ntbl_continuous()\n\ntbl_wide_summary()\n\ntbl_ard_summary()\n\ntbl_ard_continuous()\n\ntbl_ard_wide_summary()"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#ard-first-tables-2",
+    "href": "slides-gtsummary/index.html#ard-first-tables-2",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "ARD-first Tables",
+    "text": "ARD-first Tables\nWe can use the skills we learned earlier today to create ARDs for gtsummary tables.\n\n\nlibrary(cards)\n\nard &lt;- ard_stack(\n  data = trial, \n  ard_continuous(variables = age),\n  ard_categorical(variables = grade),\n  ard_dichotomous(variables = response),\n  # add these for best-looking tables\n  .attributes = TRUE, \n  .missing = TRUE \n)\nard\n\n\n   variable variable_level   context stat_name stat_label   stat\n1       age                continuo…         N          N    189\n2       age                continuo…      mean       Mean 47.238\n3       age                continuo…        sd         SD 14.312\n4       age                continuo…    median     Median     47\n5       age                continuo…       p25         Q1     38\n6       age                continuo…       p75         Q3     57\n7       age                continuo…       min        Min      6\n8       age                continuo…       max        Max     83\n9       age                  missing     N_obs  Vector L…    200\n10      age                  missing    N_miss  N Missing     11\n\n\n\n\nThe .attributes=TRUE call adds column attributes, like labels, to the ARD table, which leads to better defaults by displaying the column labels in the table."
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#ard-first-tables-3",
+    "href": "slides-gtsummary/index.html#ard-first-tables-3",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "ARD-first Tables",
+    "text": "ARD-first Tables\nWe can simply use the ARD from the previous slide, and pass it to tbl_ard_summary() for a summary table.\n\n\ntbl_ard_summary(ard)\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nN = 2001\n\n\n\n\nAge\n47.0 (38.0, 57.0)\n\n\n    Unknown\n11\n\n\nGrade\n\n\n\n\n    I\n68 (34.0%)\n\n\n    II\n68 (34.0%)\n\n\n    III\n64 (32.0%)\n\n\nTumor Response\n61 (31.6%)\n\n\n    Unknown\n7\n\n\n\n1 Median (Q1, Q3); n (%)"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#ard-first-tables-4",
+    "href": "slides-gtsummary/index.html#ard-first-tables-4",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "ARD-first Tables",
+    "text": "ARD-first Tables\nNow let’s try a somewhat more complicated table.\n\ntrial |&gt; \n  labelled::set_variable_labels(age = \"Age, years\") |&gt; \n  ard_stack( \n    .by = trt,\n    ard_continuous(\n      variables = age,\n      fmt_fn = age ~ list(sd = 2)\n    ),\n    ard_categorical(variables = grade),\n    ard_dichotomous(variables = response),\n    # add these for best-looking tables\n    .attributes = TRUE, \n    .missing = TRUE \n  ) |&gt; \n  tbl_ard_summary(\n    by = trt,\n    type = all_continuous() ~ \"continuous2\",\n    statistic = all_continuous() ~ c(\"{mean} ({sd})\", \"{min} - {max}\"),\n    missing = \"no\"\n  ) |&gt; \n  modify_caption(\"**Table 1. Subject Demographics**\")"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#ard-first-tables-4-output",
+    "href": "slides-gtsummary/index.html#ard-first-tables-4-output",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "ARD-first Tables",
+    "text": "ARD-first Tables\n\n\n\n\n\nTable 1. Subject Demographics\n\n\n\n\n\n\n\nCharacteristic\nDrug A\nN = 981\nDrug B\nN = 1021\n\n\n\n\nAge, years\n\n\n\n\n\n\n    Mean (SD)\n47.0 (14.71)\n47.4 (14.01)\n\n\n    Min - Max\n6.0 - 78.0\n9.0 - 83.0\n\n\nGrade\n\n\n\n\n\n\n    I\n35 (35.7%)\n33 (32.4%)\n\n\n    II\n32 (32.7%)\n36 (35.3%)\n\n\n    III\n31 (31.6%)\n33 (32.4%)\n\n\nTumor Response\n28 (29.5%)\n33 (33.7%)\n\n\n\n1 n (%)"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#gtsummary-exercise-2",
+    "href": "slides-gtsummary/index.html#gtsummary-exercise-2",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "{gtsummary} Exercise 2",
+    "text": "{gtsummary} Exercise 2\n\nNavigate to Posit Cloud script 04-gtsummary_exercise2.R.\nCreate the table outlined in the script.\nAdd the “completed” sticky note to your laptop when complete.\n\n\n\n\n−+\n10:00"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#gtsummary-theme-basics",
+    "href": "slides-gtsummary/index.html#gtsummary-theme-basics",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "{gtsummary} theme basics",
+    "text": "{gtsummary} theme basics\n\nA theme is a set of customization preferences that can be easily set and reused.\nThemes control default settings for existing functions\nThemes control more fine-grained customization not available via arguments or helper functions\nEasily use one of the available themes, or create your own"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#gtsummary-default-theme",
+    "href": "slides-gtsummary/index.html#gtsummary-default-theme",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "{gtsummary} default theme",
+    "text": "{gtsummary} default theme\n\n\nreset_gtsummary_theme()\n\ntrial |&gt; \n  tbl_summary(\n    by = trt, \n    include = c(age, response)\n  ) |&gt;\n  modify_caption(\n    \"Default Theme\"\n  )\n\n\n\n\n\n\nDefault Theme\n\n\n\n\n\n\n\nCharacteristic\nDrug A\nN = 981\nDrug B\nN = 1021\n\n\n\n\nAge\n46 (37, 60)\n48 (39, 56)\n\n\n    Unknown\n7\n4\n\n\nTumor Response\n28 (29%)\n33 (34%)\n\n\n    Unknown\n3\n4\n\n\n\n1 Median (Q1, Q3); n (%)"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#gtsummary-theme_gtsummary_journal",
+    "href": "slides-gtsummary/index.html#gtsummary-theme_gtsummary_journal",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "{gtsummary} theme_gtsummary_journal()",
+    "text": "{gtsummary} theme_gtsummary_journal()\n\n\nreset_gtsummary_theme()\ntheme_gtsummary_journal(journal = \"jama\")\n\ntrial |&gt; \n  tbl_summary(\n    by = trt, \n    include = c(age, response)\n  ) |&gt;\n  modify_caption(\n    \"Journal Theme (JAMA)\"\n  )\n\n\n\n\n\n\nJournal Theme (JAMA)\n\n\n\n\n\n\n\nCharacteristic\nDrug A\nN = 98\nDrug B\nN = 102\n\n\n\n\nAge, Median (IQR)\n46 (37 – 60)\n48 (39 – 56)\n\n\n    Unknown\n7\n4\n\n\nTumor Response, n (%)\n28 (29)\n33 (34)\n\n\n    Unknown\n3\n4"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#gtsummary-theme_gtsummary_language",
+    "href": "slides-gtsummary/index.html#gtsummary-theme_gtsummary_language",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "{gtsummary} theme_gtsummary_language()",
+    "text": "{gtsummary} theme_gtsummary_language()\n\n\nreset_gtsummary_theme()\ntheme_gtsummary_language(language = \"zh-tw\")\n\ntrial |&gt; \n  tbl_summary(\n    by = trt, \n    include = c(age, response)\n  ) |&gt;\n  add_p() |&gt; \n  modify_caption(\n    \"Language Theme (Chinese)\"\n  )\n\n\n\n\n\n\nLanguage Theme (Chinese)\n\n\n\n\n\n\n\n\n特色\nDrug A\nN = 981\nDrug B\nN = 1021\nP 值\n\n\n\n\nAge\n46 (37, 60)\n48 (39, 56)\n\n\n\n\n    未知\n7\n4\n\n\n\n\nTumor Response\n28 (29%)\n33 (34%)\n\n\n\n\n    未知\n3\n4\n\n\n\n\n\n1 中位數 (Q1, Q3); n (%)\n\n\n\n\n\n\n\n\nLanguage options:\n\n\n\nGerman\nEnglish\nSpanish\nFrench\nGujarati\nHindi\n\n\n\nIcelandic\nJapanese\nKorean\nMarathi\nDutch\n\n\n\nNorwegian\nPortuguese\nSwedish\nChinese Simplified\nChinese Traditional"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#gtsummary-theme_gtsummary_compact",
+    "href": "slides-gtsummary/index.html#gtsummary-theme_gtsummary_compact",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "{gtsummary} theme_gtsummary_compact()",
+    "text": "{gtsummary} theme_gtsummary_compact()\n\nreset_gtsummary_theme()\ntheme_gtsummary_compact()\n\ntrial |&gt; \n  tbl_summary(\n    by = trt, \n    include = c(age, response)\n  ) |&gt;\n  modify_caption(\"Compact Theme\")\n\n\n\n\n\nCompact Theme\n\n\n\n\n\n\n\nCharacteristic\nDrug A\nN = 981\nDrug B\nN = 1021\n\n\n\n\nAge\n46 (37, 60)\n48 (39, 56)\n\n\n    Unknown\n7\n4\n\n\nTumor Response\n28 (29%)\n33 (34%)\n\n\n    Unknown\n3\n4\n\n\n\n1 Median (Q1, Q3); n (%)\n\n\n\n\n\n\n\n\nReduces padding and font size"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#a-pharma-theme",
+    "href": "slides-gtsummary/index.html#a-pharma-theme",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "A pharma theme?",
+    "text": "A pharma theme?\nWhile not yet exported from gtsummary, we can create a theme for tables that look more like what we expect in pharma.\n\nFixed-width font\nContinuous variable summaries default to multi-line\nFunction for rounding percentages includes leading white space\nDefault right alignment on summary statistics\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nPlacebo\nN = 86\nXanomeline Low Dose\nN = 84\nXanomeline High Dose\nN = 84\n\n\n\n\nAge\n\n\n\n\n\n\n\n\n    Median (Q1, Q3)\n76.0 (69.0, 82.0)\n77.5 (71.0, 82.0)\n76.0 (70.5, 80.0)\n\n\n    Mean (SD)\n75.2 (8.6)\n75.7 (8.3)\n74.4 (7.9)\n\n\n    Min - Max\n52.0 - 89.0\n51.0 - 88.0\n56.0 - 88.0\n\n\nAge Group, n (%)\n\n\n\n\n\n\n\n\n    &lt;65\n14 (16.3%)\n8 ( 9.5%)\n11 (13.1%)\n\n\n    65-80\n42 (48.8%)\n47 (56.0%)\n55 (65.5%)\n\n\n    &gt;80\n30 (34.9%)\n29 (34.5%)\n18 (21.4%)\n\n\nFemale, n (%)\n53 (61.6%)\n50 (59.5%)\n40 (47.6%)"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#gtsummary-set_gtsummary_theme",
+    "href": "slides-gtsummary/index.html#gtsummary-set_gtsummary_theme",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "{gtsummary} set_gtsummary_theme()",
+    "text": "{gtsummary} set_gtsummary_theme()\n\nset_gtsummary_theme() to use a custom theme.\nSee the {gtsummary} + themes vignette for examples\n\nhttp://www.danieldsjoberg.com/gtsummary/articles/themes.html"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#gtsummary-print-engines-1",
+    "href": "slides-gtsummary/index.html#gtsummary-print-engines-1",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "{gtsummary} print engines",
+    "text": "{gtsummary} print engines"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#gtsummary-print-engines-2",
+    "href": "slides-gtsummary/index.html#gtsummary-print-engines-2",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "{gtsummary} print engines",
+    "text": "{gtsummary} print engines\nUse any print engine to customize table\n\n\nlibrary(gt)\ntrial |&gt;\n  select(age, grade) |&gt;\n  tbl_summary() |&gt;\n  as_gt() |&gt;\n  cols_width(label ~ px(300)) |&gt;\n  cols_align(columns = stat_0, \n             align = \"left\")\n\n\n\n\n\n\n\n\nCharacteristic\nN = 2001\n\n\n\n\nAge\n47 (38, 57)\n\n\n    Unknown\n11\n\n\nGrade\n\n\n\n\n    I\n68 (34%)\n\n\n    II\n68 (34%)\n\n\n    III\n64 (32%)\n\n\n\n1 Median (Q1, Q3); n (%)"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#gtsummary-website",
+    "href": "slides-gtsummary/index.html#gtsummary-website",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "{gtsummary} website",
+    "text": "{gtsummary} website\nhttp://www.danieldsjoberg.com/gtsummary/"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#section-1",
+    "href": "slides-gtsummary/index.html#section-1",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "",
+    "text": "Package Authors/Contributors\n\nDaniel D. Sjoberg\nJoseph Larmarange\nMichael Curry\nJessica Lavery\nKarissa Whiting\nEmily C. Zabor\nXing Bai\nEsther Drill\nJessica Flynn\nMargie Hannum\nStephanie Lobaugh\nShannon Pileggi\nAmy Tin\nGustavo Zapata Wainberg\n\n\nOther Contributors\n\n@abduazizR, @ablack3, @ABohynDOE, @ABorakati, @adilsonbauhofer, @aghaynes, @ahinton-mmc, @aito123, @akarsteve, @akefley, @albamrt, @albertostefanelli, @alecbiom, @alexandrayas, @alexis-catherine, @AlexZHENGH, @alnajar, @amygimma, @anaavu, @anddis, @andrader, @Andrzej-Andrzej, @angelgar, @arbet003, @arnmayer, @aspina7, @AurelienDasre, @awcm0n, @ayogasekaram, @barretmonchka, @barthelmes, @bc-teixeira, @bcjaeger, @BeauMeche, @benediktclaus, @benwhalley, @berg-michael, @bhattmaulik, @BioYork, @blue-abdur, @brachem-christian, @brianmsm, @browne123, @bwiernik, @bx259, @calebasaraba, @CarolineXGao, @CharlyMarie, @ChongTienGoh, @Chris-M-P, @chrisleitzinger, @cjprobst, @ClaudiaCampani, @clmawhorter, @CodieMonster, @coeusanalytics, @coreysparks, @CorradoLanera, @crystalluckett-sanofi, @ctlamb, @dafxy, @DanChaltiel, @DanielPark-MGH, @davideyre, @davidgohel, @davidkane9, @DavisVaughan, @dax44, @dchiu911, @ddsjoberg, @DeFilippis, @denis-or, @dereksonderegger, @derekstein, @DesiQuintans, @dieuv0, @dimbage, @discoleo, @djbirke, @dmenne, @DrDinhLuong, @edelarua, @edrill, @Eduardo-Auer, @ElfatihHasabo, @emilyvertosick, @eokoshi, @ercbk, @eremingt, @erikvona, @eugenividal, @eweisbrod, @fdehrich, @feizhadj, @fh-jsnider, @fh-mthomson, @FrancoisGhesquiere, @ge-generation, @Generalized, @ghost, @giorgioluciano, @giovannitinervia9, @gjones1219, @gorkang, @GuiMarthe, @gungorMetehan, @hass91, @hescalar, @HichemLa, @hichew22, @hr70, @huftis, @hughjonesd, @iaingallagher, @ilyamusabirov, @IndrajeetPatil, @irene9116, @IsadoraBM, @j-tamad, @jalavery, @jaromilfrossard, @JBarsotti, @jbtov, @jeanmanguy, @jemus42, @jenifav, @jennybc, @JeremyPasco, @jerrodanzalone, @JesseRop, @jflynn264, @jhchou, @jhelvy, @jhk0530, @jjallaire, @jkylearmstrong, @jmbarajas, @jmbarbone, @JoanneF1229, @joelgautschi, @johnryan412, @JohnSodling, @jonasrekdalmathisen, @JonGretar, @jordan49er, @jsavinc, @jthomasmock, @juseer, @jwilliman, @karissawhiting, @karl-an, @kendonB, @kentm4, @klh281, @kmdono02, @kristyrobledo, @kwakuduahc1, @lamberp6, @lamhine, @larmarange, @ledermanr, @leejasme, @leslem, @levossen, @lngdet, @longjp, @lorenzoFabbri, @loukesio, @love520lfh, @lspeetluk, @ltin1214, @ltj-github, @lucavd, @LucyMcGowan, @LuiNov, @lukejenner6, @maciekbanas, @maia-sh, @malcolmbarrett, @mariamaseng, @Marsus1972, @martsobm, @Mathicaa, @matthieu-faron, @maxanes, @mayazadok2, @mbac, @mdidish, @medewitt, @meenakshi-kushwaha, @melindahiggins2000, @MelissaAssel, @Melkiades, @mfansler, @michaelcurry1123, @mikemazzucco, @mlamias, @mljaniczek, @moleps, @monitoringhsd, @motocci, @mrmvergeer, @msberends, @mvuorre, @myamortor, @myensr, @MyKo101, @nalimilan, @ndunnewind, @nikostr, @ningyile, @O16789, @oliviercailloux, @oranwutang, @palantre, @parmsam, @Pascal-Schmidt, @PaulC91, @paulduf, @pedersebastian, @perlatex, @pgseye, @philippemichel, @philsf, @polc1410, @Polperobis, @postgres-newbie, @proshano, @raphidoc, @RaviBot, @rawand-hanna, @rbcavanaugh, @remlapmot, @rich-iannone, @RiversPharmD, @rmgpanw, @roaldarbol, @roman2023, @ryzhu75, @s-j-choi, @sachijay, @saifelayan, @sammo3182, @samrodgersmelnick, @samuele-mercan, @sandhyapc, @sbalci, @sda030, @shah-in-boots, @shannonpileggi, @shaunporwal, @shengchaohou, @ShixiangWang, @simonpcouch, @slb2240, @slobaugh, @spiralparagon, @Spring75xx, @StaffanBetner, @steenharsted, @stenw, @Stephonomon, @storopoli, @stratopopolis, @strengejacke, @szimmer, @tamytsujimoto, @TAOS25, @TarJae, @themichjam, @THIB20, @tibirkrajc, @tjmeyers, @tldrcharlene, @tormodb, @toshifumikuroda, @TPDeramus, @UAB-BST-680, @uakimix, @uriahf, @Valja64, @viola-hilbert, @violet-nova, @vvm02, @will-gt, @xkcococo, @xtimbeau, @yatirbe, @yihunzeleke, @yonicd, @yoursdearboy, @YousufMohammed2002, @yuryzablotski, @zabore, @zachariae, @zaddyzad, @zawkzaw, @zdz2101, @zeyunlu, @zhangkaicr, @zhaohongxin0, @zheer-kejlberg, @zhengnow, @zhonghua723, @zlkrvsm, @zongell-star, and @Zoulf001."
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#thank-you",
+    "href": "slides-gtsummary/index.html#thank-you",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "Thank you",
+    "text": "Thank you\n\n\n\n Ask on stackoverflow.com\n Use the gtsummary tag\n Thousands of posts!\n More on ARDs at the 2024 R/Pharma Workshop\n\n danieldsjoberg.com\n mastodon.social/@ddsjoberg\n linkedin.com/in/ddsjoberg/\n github.com/ddsjoberg\n\n\n\n\n\nPharmaverse Workshop (pos.it/pharmaverse_24)"
+  },
+  {
+    "objectID": "pre-conf-communication.html",
+    "href": "pre-conf-communication.html",
+    "title": "Pre-Conference Communications",
+    "section": "",
+    "text": "August 7, 2024\nHello everyone! We are excited to spend the day with you for the Flavors of the Pharmaverse workshop at posit::conf on Monday, August 12!\nIn this workshop, we’ll give a high level overview of the scope and tools available within the Pharmaverse for the clinical pipeline, focusing on ADaMs through outputs. Our hope is that you will walk away with an understanding of how there are different paradigms and pathways through the pharmaverse. A basic understanding of R and tidyverse is expected for this workshop. More information about the workshop can be found here: https://posit-conf-2024.github.io/pharmaverse/ (will be updated up to the workshop).\nFor the day to run smoothly, please be sure to bring your own laptop and charger so you can follow along and do the exercises. We will be using Posit Cloud, so you don’t need to worry about getting anything installed on your computer. Just make sure you have a free Posit Cloud account before the workshop starts.\nDuring the workshop, we will be using Slack as our main communication method. A link to our dedicated Slack channel will be sent to your email separately – please keep an eye out for that! If you have any questions before the workshop, please feel free to drop them in the Slack channel.\nYour instructors,\nAndrew, Becca, Casey, Daniel, and Ellis",
+    "crumbs": [
+      "Communications"
+    ]
+  },
+  {
+    "objectID": "license.html",
+    "href": "license.html",
+    "title": "License",
+    "section": "",
+    "text": "This work is licensed under a Creative Commons Attribution 4.0 International License.",
+    "crumbs": [
+      "License"
+    ]
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Flavors of the pharmaverse",
@@ -44,29 +463,9 @@
     "href": "index.html#instructors",
     "title": "Flavors of the pharmaverse",
     "section": "Instructors",
-    "text": "Instructors\n\nDaniel D. Sjoberg (he/him) is a Senior Principal Data Scientist at Genentech. Previously, he was a Lead Data Science Manager at the Prostate Cancer Clinical Trials Consortium, and a Senior Biostatistician at Memorial Sloan Kettering Cancer Center in New York City. He enjoys R package development, creating many packages available on CRAN, R-Universe, and GitHub. He’s a co-organizer of rainbowR (a community that supports, promotes and connects LGBTQ+ people who code in the R language) and of the R Medicine Conference. His research interests include adaptive methods in clinical trials, precision medicine, and predictive modeling. Daniel is the winner of the 2021 American Statistical Association (ASA) Innovation in Statistical Programming and Analytics award.\n\nBecca Krouse is a data scientist in GSK’s Statistics and Data Science Innovation Hub. A biostatistician by training, she has experience spanning 13+ years in the field of clinical research and specializes in developing R-based tools.\n\n\nEllis Hughes is a Data Science Leader and has worked in the pharmaceutical industry for almost a decade. He focuses on how organizations can use R and take open source approaches to improve processes and solve problems. During his free time he organizes the Seattle UseR group, the Cascadia R Conference, and hosts a weekly R screencast, TidyX, to explain data science concepts.\n\nAndrew Bates Andrew is a Data Solutions Engineer at Atorus Research where he builds tools that enable people to solve their data problems. He specializes in R and its intersection with web technologies.\nCasey Aguilar-Gervase is a Senior Data Visualization Engineer at Atorus. Casey enjoys combining the art of design with clinical programming in R to create innovative Shiny applications. With a strong background in both disciplines, Casey is passionate about pushing the boundaries of Shiny to develop user-friendly, data-driven solutions that meet technical requirements and provide an exceptional user experience.",
+    "text": "Instructors\n\nDaniel D. Sjoberg (he/him) is a Senior Principal Data Scientist at Genentech. Previously, he was a Lead Data Science Manager at the Prostate Cancer Clinical Trials Consortium, and a Senior Biostatistician at Memorial Sloan Kettering Cancer Center in New York City. He enjoys R package development, creating many packages available on CRAN, R-Universe, and GitHub. He’s a co-organizer of rainbowR (a community that supports, promotes and connects LGBTQ+ people who code in the R language) and of the R Medicine Conference. His research interests include adaptive methods in clinical trials, precision medicine, and predictive modeling. Daniel is the winner of the 2021 American Statistical Association (ASA) Innovation in Statistical Programming and Analytics award.\n   \n\nBecca Krouse is a data scientist in GSK’s Statistics and Data Science Innovation Hub. A biostatistician by training, she has experience spanning 13+ years in the field of clinical research and specializes in developing R-based tools.\n\n\nEllis Hughes is a Data Science Leader and has worked in the pharmaceutical industry for almost a decade. He focuses on how organizations can use R and take open source approaches to improve processes and solve problems. During his free time he organizes the Seattle UseR group, the Cascadia R Conference, and hosts a weekly R screencast, TidyX, to explain data science concepts.\n\nAndrew Bates Andrew is a Data Solutions Engineer at Atorus Research where he builds tools that enable people to solve their data problems. He specializes in R and its intersection with web technologies.\nCasey Aguilar-Gervase is a Senior Data Visualization Engineer at Atorus. Casey enjoys combining the art of design with clinical programming in R to create innovative Shiny applications. With a strong background in both disciplines, Casey is passionate about pushing the boundaries of Shiny to develop user-friendly, data-driven solutions that meet technical requirements and provide an exceptional user experience.",
     "crumbs": [
       "Home"
-    ]
-  },
-  {
-    "objectID": "license.html",
-    "href": "license.html",
-    "title": "License",
-    "section": "",
-    "text": "This work is licensed under a Creative Commons Attribution 4.0 International License.",
-    "crumbs": [
-      "License"
-    ]
-  },
-  {
-    "objectID": "pre-conf-communication.html",
-    "href": "pre-conf-communication.html",
-    "title": "Pre-Conference Communications",
-    "section": "",
-    "text": "August 7, 2024\nHello everyone! We are excited to spend the day with you for the Flavors of the Pharmaverse workshop at posit::conf on Monday, August 12!\nIn this workshop, we’ll give a high level overview of the scope and tools available within the Pharmaverse for the clinical pipeline, focusing on ADaMs through outputs. Our hope is that you will walk away with an understanding of how there are different paradigms and pathways through the pharmaverse. A basic understanding of R and tidyverse is expected for this workshop. More information about the workshop can be found here: https://posit-conf-2024.github.io/pharmaverse/ (will be updated up to the workshop).\nFor the day to run smoothly, please be sure to bring your own laptop and charger so you can follow along and do the exercises. We will be using Posit Cloud, so you don’t need to worry about getting anything installed on your computer. Just make sure you have a free Posit Cloud account before the workshop starts.\nDuring the workshop, we will be using Slack as our main communication method. A link to our dedicated Slack channel will be sent to your email separately – please keep an eye out for that! If you have any questions before the workshop, please feel free to drop them in the Slack channel.\nYour instructors,\nAndrew, Becca, Casey, Daniel, and Ellis",
-    "crumbs": [
-      "Communications"
     ]
   }
 ]
