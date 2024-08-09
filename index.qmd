@@ -53,7 +53,7 @@ tibble::tribble(
   "12:00 - 13:30", "*Lunch*",
   "13:30 - 15:00", "{tfrmt}
                     <br><br>
-                    {gtsummary}",
+                    [Create Tables with {gtsummary}](https://posit-conf-2024.github.io/pharmaverse/slides-gtsummary)",
   "15:00 - 15:30", "*Coffee Break*",
   "15:30 - 17:00", "Recap, Discussion, and Read Out",
 ) |> 

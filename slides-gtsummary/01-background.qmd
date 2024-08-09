@@ -1,11 +1,12 @@
-# Do I need this?
 
 ## How it started
 
-::: {.columns .v-center-container}
+::: {.columns}
 ::: {.column width="60%"}
 
-- Began to address reproducible issues in research while I was working in academia
+::: small
+
+- Began to address reproducible issues while working in academia
 
 - Goal was to build a package to summarize study results with code that was [both simple and customizable]{.emphasis}
 
@@ -15,11 +16,19 @@
   - 1000+ GitHub stars
   - 300+ contributors 
   - ~50 code contributors
+  
+- Won the 2021 American Statistical Association (ASA) Innovation in Programming Award
+
+- Won the 2024 Posit Pharma Table Contest
+
+:::
 
 :::
 ::: {.column width="40%"}
 
 <img src="images/gtsummary-logo.png" width="650"/>
+
+<img src="images/asa.png" width="200"/><img src="images/posit.png" width="200"/>
 
 :::
 :::
