@@ -15,9 +15,11 @@
 ```{r}
 #| output-location: "column"
 reset_gtsummary_theme()
-m1 |>
-  tbl_regression(
-    exponentiate = TRUE
+
+trial |> 
+  tbl_summary(
+    by = trt, 
+    include = c(age, response)
   ) |>
   modify_caption(
     "Default Theme"
@@ -31,16 +33,15 @@ m1 |>
 reset_gtsummary_theme()
 theme_gtsummary_journal(journal = "jama")
 
-m1 |>
-  tbl_regression(
-    exponentiate = TRUE
+trial |> 
+  tbl_summary(
+    by = trt, 
+    include = c(age, response)
   ) |>
   modify_caption(
     "Journal Theme (JAMA)"
   )
 ```
-
-*Contributions welcome!*
 
 ## {gtsummary} theme_gtsummary_language()
 
@@ -49,10 +50,12 @@ m1 |>
 reset_gtsummary_theme()
 theme_gtsummary_language(language = "zh-tw")
 
-m1 |>
-  tbl_regression(
-    exponentiate = TRUE
+trial |> 
+  tbl_summary(
+    by = trt, 
+    include = c(age, response)
   ) |>
+  add_p() |> 
   modify_caption(
     "Language Theme (Chinese)"
   )
@@ -96,11 +99,55 @@ m1 |>
 reset_gtsummary_theme()
 theme_gtsummary_compact()
 
-tbl_regression(m1, exponentiate = TRUE) |>
+trial |> 
+  tbl_summary(
+    by = trt, 
+    include = c(age, response)
+  ) |>
   modify_caption("Compact Theme")
 ```
 
 *Reduces padding and font size*
+
+## A pharma theme?
+
+While not yet exported from gtsummary, we can create a theme for tables that look more like what we expect in pharma.
+
+- Fixed-width font
+
+- Continuous variable summaries default to multi-line
+
+- Function for rounding percentages includes leading white space
+
+- Default right alignment on summary statistics
+
+```{r}
+#| echo: false
+theme_gtsummary_compact()
+cards::ADSL |>
+  dplyr::select(ARM, AGE, AGEGR1, SEX) |>
+  dplyr::mutate(
+    ARM = factor(ARM, levels = c("Placebo", "Xanomeline Low Dose", "Xanomeline High Dose")),
+    # AGEGR1 = factor(AGEGR1, levels = c("<65", "65-80", ">80"), labels = c("&lt;65", "65-80", ">80"))
+    AGEGR1 = factor(AGEGR1, levels = c("<65", "65-80", ">80"), labels = c("<65", "65-80", ">80"))
+  ) |>
+  tbl_summary(
+    by = ARM,
+    type = AGE ~ "continuous2",
+    statistic = AGE ~ c("{median} ({p25}, {p75})", "{mean} ({sd})", "{min} - {max}"),
+    value = SEX ~ "F",
+    label = list(SEX = "Female", AGEGR1 = "Age Group"),
+    digits = list(all_categorical() ~ list(p = cards::alias_as_fmt_fn("xx.x%")),
+                  all_continuous() ~ 1L)
+  ) |>
+  add_stat_label() |>
+  bold_labels() |>
+  modify_header(all_stat_cols() ~ "**{level}**  \nN = {n}") |>
+  modify_column_alignment(columns = -label, "right") |>
+  as_gt() |>
+  gt::cols_width(gtsummary::all_stat_cols() ~ gt::pct(23)) |>
+  gt::opt_table_font(stack = "monospace-code")
+```
 
 ## {gtsummary} set_gtsummary_theme()
 
@@ -110,3 +157,8 @@ tbl_regression(m1, exponentiate = TRUE) |>
 * See the {gtsummary} + themes vignette for examples
 
 [http://www.danieldsjoberg.com/gtsummary/articles/themes.html](http://www.danieldsjoberg.com/gtsummary/articles/themes.html)
+
+```{r}
+#| echo: false
+reset_gtsummary_theme()
+```

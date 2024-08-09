@@ -24,9 +24,11 @@ execute:
 
 {{< include 04-tbl_merge.qmd >}}
 
-<!-- {{< include 07-themes.qmd >}} -->
+{{< include 05-ard-first.qmd >}}
 
-<!-- {{< include 08-print_engines.qmd >}} -->
+{{< include 07-themes.qmd >}}
 
-<!-- {{< include 09-summary.qmd >}} -->
+{{< include 08-print_engines.qmd >}}
+
+{{< include 09-summary.qmd >}}
 

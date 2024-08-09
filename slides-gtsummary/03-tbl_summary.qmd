@@ -191,7 +191,15 @@ This syntax is also used in {cards}, {cardx}, and {gt}.
 
 **Named list are OK too!** `label = list(age = "Patient Age")`
 
-## Add-on functions in {gtsummary}
+## 
+
+### {gtsummary} selectors
+
+- Use the following helpers to [select groups of variables]{.emphasis}: `all_continuous()`, `all_categorical()`
+
+- Use `all_stat_cols()` to select the [summary statistic columns]{.emphasis}
+
+### Add-on functions in {gtsummary}
 
 `tbl_summary()` objects can also be updated using related functions.
 
@@ -413,15 +421,13 @@ See the documentation at <http://www.danieldsjoberg.com/gtsummary/reference/inde
 
 And a detailed `tbl_summary()` vignette at <http://www.danieldsjoberg.com/gtsummary/articles/tbl_summary.html>
 
-## Exercise 1
+## {gtsummary} Exercise 1
 
-1.  Create a summary table split by whether or not the participant quit smoking or not.
+1. Navigate to Posit Cloud script `04-gtsummary_exercise1.R`.
 
-2.  Include all variables in the table except the study outcome: death.
+2. Create the table outlined in the script.
 
-3.  Consider using gtsummary functions that `add_*()`, `modify_*()` or style your summary table.
-
-    -   `tbl_summary()` tutorial for reference: [https://www.danieldsjoberg.com/gtsummary/articles/tbl_summary.html](https://www.danieldsjoberg.com/gtsummary/articles/tbl_summary.html)
+3. Add the "completed" sticky note to your laptop when complete.
 
 ```{r}
 #| echo: false
