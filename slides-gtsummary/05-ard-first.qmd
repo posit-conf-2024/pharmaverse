@@ -97,6 +97,37 @@ trial |>
   modify_caption("**Table 1. Subject Demographics**")
 ```
 
+## ARD-first Table *Shells*
+
+```{r}
+#| label: 'tbl_ard_summary-mock'
+#| output-location: "slide"
+#| code-line-numbers: "15"
+trial |> 
+  labelled::set_variable_labels(age = "Age, years") |> 
+  ard_stack( 
+    .by = trt,
+    ard_continuous(
+      variables = age,
+      fmt_fn = age ~ list(sd = 2)
+    ),
+    ard_categorical(variables = grade),
+    ard_dichotomous(variables = response),
+    # add these for best-looking tables
+    .attributes = TRUE, 
+    .missing = TRUE 
+  ) |> 
+  dplyr::mutate(fmt_fn = list(\(x) "xx.x")) |> 
+  tbl_ard_summary(
+    by = trt,
+    type = all_continuous() ~ "continuous2",
+    statistic = all_continuous() ~ c("{mean} ({sd})", "{min} - {max}"),
+    missing = "no"
+  ) |> 
+  modify_header(all_stat_cols() ~ "**{level}**  \nN = xx")
+```
+
+
 ## {gtsummary} Exercise 2
 
 1. Navigate to Posit Cloud script `04-gtsummary_exercise2.R`.
