@@ -130,7 +130,7 @@ trial |>
 
 ## {gtsummary} Exercise 2
 
-1. Navigate to Posit Cloud script `04-gtsummary_exercise2.R`.
+1. Navigate to Posit Cloud script `05-gtsummary_exercise2.R`.
 
 2. Create the table outlined in the script.
 
