@@ -47,10 +47,10 @@ tibble::tribble(
                     <br><br>
                     [{admiral} and {xportr}](https://github.com/posit-conf-2024/pharmaverse/blob/main/materials/1-admiral-xportr/admiral_and_xportr_slides.pptx)",
   "10:30 - 11:00", "*Coffee Break*",
-  "11:00 - 12:00", "[Introduction to tables](https://docs.google.com/presentation/d/1LLcsh02_6imhvLrvnvRmSV2MFijYmavg0MRh3eRMKMQ/pub?start=false&loop=false&delayms=60000)
+  "11:00 - 12:30", "[Introduction to tables](https://docs.google.com/presentation/d/1LLcsh02_6imhvLrvnvRmSV2MFijYmavg0MRh3eRMKMQ/pub?start=false&loop=false&delayms=60000)
                     <br><br>
                     [Analysis Result Datasets](https://github.com/posit-conf-2024/pharmaverse/blob/main/materials/2-ARDs/ARDs_slides.pptx)",
-  "12:00 - 13:30", "*Lunch*",
+  "12:30 - 13:30", "*Lunch*",
   "13:30 - 15:00", "[{tfrmt}](https://github.com/posit-conf-2024/pharmaverse/blob/main/materials/3-Tables/Tables-tfrmt_slides.pptx)
                     <br><br>
                     [Create Tables with {gtsummary}](https://posit-conf-2024.github.io/pharmaverse/slides-gtsummary)",
