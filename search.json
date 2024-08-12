@@ -308,6 +308,20 @@
     "text": "ARD-first Tables\n\n\n\n\n\nTable 1. Subject Demographics\n\n\n\n\n\n\n\nCharacteristic\nDrug A\nN = 981\nDrug B\nN = 1021\n\n\n\n\nAge, years\n\n\n\n\n\n\n    Mean (SD)\n47.0 (14.71)\n47.4 (14.01)\n\n\n    Min - Max\n6.0 - 78.0\n9.0 - 83.0\n\n\nGrade\n\n\n\n\n\n\n    I\n35 (35.7%)\n33 (32.4%)\n\n\n    II\n32 (32.7%)\n36 (35.3%)\n\n\n    III\n31 (31.6%)\n33 (32.4%)\n\n\nTumor Response\n28 (29.5%)\n33 (33.7%)\n\n\n\n1 n (%)"
   },
   {
+    "objectID": "slides-gtsummary/index.html#ard-first-table-shells",
+    "href": "slides-gtsummary/index.html#ard-first-table-shells",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "ARD-first Table Shells",
+    "text": "ARD-first Table Shells\n\ntrial |&gt; \n  labelled::set_variable_labels(age = \"Age, years\") |&gt; \n  ard_stack( \n    .by = trt,\n    ard_continuous(\n      variables = age,\n      fmt_fn = age ~ list(sd = 2)\n    ),\n    ard_categorical(variables = grade),\n    ard_dichotomous(variables = response),\n    # add these for best-looking tables\n    .attributes = TRUE, \n    .missing = TRUE \n  ) |&gt; \n  dplyr::mutate(fmt_fn = list(\\(x) \"xx.x\")) |&gt; \n  tbl_ard_summary(\n    by = trt,\n    type = all_continuous() ~ \"continuous2\",\n    statistic = all_continuous() ~ c(\"{mean} ({sd})\", \"{min} - {max}\"),\n    missing = \"no\"\n  ) |&gt; \n  modify_header(all_stat_cols() ~ \"**{level}**  \\nN = xx\")"
+  },
+  {
+    "objectID": "slides-gtsummary/index.html#ard-first-table-shells-output",
+    "href": "slides-gtsummary/index.html#ard-first-table-shells-output",
+    "title": "Pharmaverse Phlavors: gtsummary + ARD",
+    "section": "ARD-first Table Shells",
+    "text": "ARD-first Table Shells\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nDrug A\nN = xx1\nDrug B\nN = xx1\n\n\n\n\nAge, years\n\n\n\n\n\n\n    Mean (SD)\nxx.x (xx.x)\nxx.x (xx.x)\n\n\n    Min - Max\nxx.x - xx.x\nxx.x - xx.x\n\n\nGrade\n\n\n\n\n\n\n    I\nxx.x (xx.x%)\nxx.x (xx.x%)\n\n\n    II\nxx.x (xx.x%)\nxx.x (xx.x%)\n\n\n    III\nxx.x (xx.x%)\nxx.x (xx.x%)\n\n\nTumor Response\nxx.x (xx.x%)\nxx.x (xx.x%)\n\n\n\n1 n (%)"
+  },
+  {
     "objectID": "slides-gtsummary/index.html#gtsummary-exercise-2",
     "href": "slides-gtsummary/index.html#gtsummary-exercise-2",
     "title": "Pharmaverse Phlavors: gtsummary + ARD",
